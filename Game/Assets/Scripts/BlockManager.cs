@@ -44,9 +44,16 @@ public class BlockManager : MonoBehaviour
         BlockValue = value;
 
         GameObject block = Instantiate(Block, new Vector3(PosX, PosY, 0), Block.transform.rotation, BlockParent.transform);
+        setBloquinhoText(block, value);
 
         return block;
 
+    }
+
+    private void setBloquinhoText(GameObject bloquinho, int value)
+    {
+        TextMeshProUGUI txtBlock = bloquinho.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        txtBlock.text = value.ToString();
     }
 
     // Start is called before the first frame update

@@ -47,10 +47,7 @@ public class BlockGrid : MonoBehaviour
         for (int i = numHorizontalBlocks - 2 ; i >= 0; i--) {
             for(int j=2; j< numVerticalBlocks - 1; j++) {
 
-                gridWorld[i,j - 2] = getPosInMap(i, j);
-
-                // Esse create block precisa ser randomico, assim como o numero dele e fazer os blocos descerem
-                //this.GetComponent<BlockManager>().createBlock(getPosInMap(i, j), 1);
+                gridWorld[i, j - 2] = getPosInMap(i, j);
 
             }
         }

@@ -42,16 +42,115 @@ public class RandomizeBlocks : MonoBehaviour
     // Pensar em formas de fazer isso sem deixar um unico sozinho
     void spawnBlockLine()
     {
+        // indica a presenca do bloco nos quadrantes
+        int[] blockPres = new int[BlockGrid.Instance.numHorizontalBlocks - 1];
+        for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+            blockPres[i] = Random.Range(0, 2);
+
+        // verifica se nao tem nenhum sozinho
         for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
         {
-            int rand = Random.Range(0, 2);
+            if (i == 0) {
+                if (blockPres[i] == 1 && blockPres[i + 1] == 0)
+                    blockPres[i + 1] = 1;
+            } else if (i == BlockGrid.Instance.numHorizontalBlocks - 3) {
+                if (blockPres[i] == 1 && blockPres[i - 1] == 0)
+                    blockPres[i - 1] = 1;
+            } else {
+                if (blockPres[i] == 1 && blockPres[i - 1] == 0 && blockPres[i + 1] == 0) {
 
-            // repensar nesse sorteio de valor - dar um jeito de pegar o valor max e min da bolinha
-            int randomValue = Random.Range(1, 2);
+                    int choose = Random.Range(0, 2);
 
-            if (rand == 1)
+                    if (choose == 0)
+                        blockPres[i - 1] = 1;
+                    else
+                        blockPres[i + 1] = 1;
+                }
+            }
+        }
+
+        int[] myValues = new int[4];
+
+        myValues[0] = 1;
+        myValues[1] = 2;
+        myValues[2] = 4;
+        myValues[3] = 8;
+
+        int index = Random.Range(0, myValues.Length);
+        int myRandomNumber = myValues[index];
+
+        // Randomiza valores para os bloquinhos
+        for(int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+        {
+            index = Random.Range(0, myValues.Length);
+            myRandomNumber = myValues[index];
+
+            blockPres[i] = myRandomNumber;
+        }
+
+        // Não permite que tenha dois numero de valores iguais um do lado do outro
+        for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+        {
+            if (i == 0)
             {
-                SpawnedBlocks[numLines, i] = BlockManager.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], randomValue);
+                if (blockPres[i] == blockPres[i + 1]) {
+
+                    while(blockPres[i] == blockPres[i + 1]) {
+                        index = Random.Range(0, myValues.Length);
+                        myRandomNumber = myValues[index];
+
+                        blockPres[i + 1] = myRandomNumber;
+                    }
+
+                }
+            }
+            else if (i == BlockGrid.Instance.numHorizontalBlocks - 3)
+            {
+                if (blockPres[i] == blockPres[i - 1]) {
+                    while (blockPres[i] == blockPres[i - 1]) {
+                        index = Random.Range(0, myValues.Length);
+                        myRandomNumber = myValues[index];
+
+                        blockPres[i - 1] = myRandomNumber;
+                    }
+                }
+            }
+            else
+            {
+                if (blockPres[i] == blockPres[i - 1])
+                {
+                    while(blockPres[i] == blockPres[i - 1]) {
+                        index = Random.Range(0, myValues.Length);
+                        myRandomNumber = myValues[index];
+
+                        blockPres[i] = myRandomNumber;
+                    }
+
+                }
+
+                if (blockPres[i] == blockPres[i + 1]) {
+
+                    while (blockPres[i] == blockPres[i + 1])
+                    {
+                        index = Random.Range(0, myValues.Length);
+                        myRandomNumber = myValues[index];
+
+                        blockPres[i + 1] = myRandomNumber;
+                    }
+                }
+            }
+
+        }
+
+        Debug.Log(blockPres[0] + " " + blockPres[1] + " " + blockPres[2] + " " + blockPres[3] + " " + blockPres[4] + " " + blockPres[5]);
+
+
+
+        for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++) {
+
+            if (blockPres[i] != 0)
+            {
+                SpawnedBlocks[numLines, i] = BlockManager.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], blockPres[i]);
             }
         }
 
