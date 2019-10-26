@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BlockGrid : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class BlockGrid : MonoBehaviour
     // Pega o topo esquerdo da tela, mede 7 blocks com o comprimento da tela
     // deixa um espaco de 1 block na parte de baixo da tela
     // monta o restante com isso
+
+    public GameObject Block;
+    public GameObject BlockParent;
 
     public int numHorizontalBlocks = 7;
 
@@ -64,9 +68,19 @@ public class BlockGrid : MonoBehaviour
 
 
 
-    // Update is called once per frame
-    void Update()
+    public GameObject createBlock(Vector3 pos, int value)
     {
-        
+        GameObject block = Instantiate(Block, new Vector3(pos.x, pos.y, 0), Block.transform.rotation, BlockParent.transform);
+        block.GetComponent<BlockManager>().BlockValue = value;
+        setBloquinhoText(block, value);
+
+        return block;
+
+    }
+
+    private void setBloquinhoText(GameObject bloquinho, int value)
+    {
+        TextMeshProUGUI txtBlock = bloquinho.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        txtBlock.text = value.ToString();
     }
 }

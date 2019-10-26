@@ -14,9 +14,25 @@ public class RandomizeBlocks : MonoBehaviour
 
     private float timer = 0;
 
-    private GameObject[,] SpawnedBlocks = new GameObject[12,6];
+    [HideInInspector] public GameObject[,] SpawnedBlocks = new GameObject[12,6];
 
     private int numLines = 0;
+
+    private static RandomizeBlocks _instance;
+
+    public static RandomizeBlocks Instance { get { return _instance; } }
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -142,15 +158,12 @@ public class RandomizeBlocks : MonoBehaviour
 
         }
 
-        Debug.Log(blockPres[0] + " " + blockPres[1] + " " + blockPres[2] + " " + blockPres[3] + " " + blockPres[4] + " " + blockPres[5]);
-
-
 
         for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++) {
 
             if (blockPres[i] != 0)
             {
-                SpawnedBlocks[numLines, i] = BlockManager.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], blockPres[i]);
+                SpawnedBlocks[numLines, i] = BlockGrid.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], blockPres[i]);
             }
         }
 
