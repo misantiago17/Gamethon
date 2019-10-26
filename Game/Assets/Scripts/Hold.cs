@@ -5,6 +5,7 @@ using TMPro;
 
 public class Hold : MonoBehaviour
 {
+    public GameObject Player;
     public GameObject Bolinha;
     public float TimeToGrowForce = 5.0f;
 
@@ -15,7 +16,7 @@ public class Hold : MonoBehaviour
     private float holdTime = 0;
 
     // O numero inicial é 4, quando ele quebra um bloco que vale mais que 4, ele passa a ser o novo máximo
-    private int MaxChargeNum = 4;
+    private int MaxChargeNum = 8;
     // A partir de certo numero quebrado ele atualiza o novo minimo do jogo
     private int MinChargeNum = 1;
 
@@ -28,7 +29,7 @@ public class Hold : MonoBehaviour
 
     private void Start()
     {
-        data = Bolinha.GetComponent<BallData>();
+        data = Player.GetComponent<BallData>();
 
         bolinhaText = Bolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
@@ -41,6 +42,9 @@ public class Hold : MonoBehaviour
         holding = true;
 
         data.updateNum(MinChargeNum);
+
+        Debug.Log("Numero valor "  + data.getNum());
+
     }
 
     private void OnMouseUp()
@@ -49,8 +53,9 @@ public class Hold : MonoBehaviour
         timer = 0;
 
         // pega a direcao do mouse e aplica a forca na bolinha
-        Vector3 direction = (-1)*(Bolinha.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
-        Bolinha.GetComponent<ThrowBall>().ThrowBallInDirection(direction);
+        Vector3 direction = (-1)*(Player.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
+        Player.GetComponent<ThrowBall>().ThrowBallInDirection(direction);
+
     }
 
     private void Update()
@@ -64,7 +69,12 @@ public class Hold : MonoBehaviour
 
                 if (data.getNum() < MaxChargeNum)
                 {
+
+                    Debug.Log("ASDADFASDF");
+
                     data.updateNum(data.getNum() * 2);
+
+                    Debug.Log("Numero valor again " + data.getNum());
                     bolinhaText.text = data.getNum().ToString();
                 }
             }

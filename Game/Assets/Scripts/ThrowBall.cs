@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ThrowBall : MonoBehaviour
 {
+    public GameObject tirinho;
+
     public float Force = 10f;
 
     private void Start()
@@ -14,7 +16,8 @@ public class ThrowBall : MonoBehaviour
     public void ThrowBallInDirection(Vector3 direction)
     {
         // Forca ta muito lunar
-        this.GetComponent<Rigidbody2D>().velocity = Force * direction;
+        GameObject tirin = GameObject.Instantiate(tirinho, this.transform.position, this.transform.rotation);
+        tirin.GetComponent<Rigidbody2D>().velocity = Force * direction;
     }
 
 
