@@ -37,11 +37,16 @@ public class MergeBlocks : MonoBehaviour
             {
                 if (spawned[i,j] == bloquinho)
                 {
-                    Debug.Log("junta os bloquinhos");
 
                     if (j == 0)
                     {
                         Debug.Log("junta os bloquinhos A");
+
+
+                        Debug.Log("i: " + i + " j: " + j);
+
+                        Debug.Log(spawned[i, j].GetComponent<BallData>().getNum() + " Obj1 Value");
+                        Debug.Log(spawned[i, j + 1].GetComponent<BallData>().getNum() + " Obj2 Value");
 
                         if (spawned[i, j] == spawned[i, j + 1]) {
                             Debug.Log("junta os bloquinhos 1");
@@ -51,6 +56,11 @@ public class MergeBlocks : MonoBehaviour
                     else if (j == BlockGrid.Instance.numHorizontalBlocks - 3)
                     {
                         Debug.Log("junta os bloquinhos B");
+
+                        Debug.Log("i: " + i + " j: " + j);
+
+                        Debug.Log(spawned[i, j].GetComponent<BallData>().getNum() + " Obj1 Value");
+                        Debug.Log(spawned[i, j - 1].GetComponent<BallData>().getNum() + " Obj2 Value");
                         if (spawned[i, j] == spawned[i, j - 1])
                         {
                             Debug.Log("junta os bloquinhos 2");
@@ -60,6 +70,12 @@ public class MergeBlocks : MonoBehaviour
                     else
                     {
                         Debug.Log("junta os bloquinhos C");
+
+                        Debug.Log("i: " + i + " j: " + j);
+
+                        Debug.Log(spawned[i, j].GetComponent<BallData>().getNum() + " Obj1 Value");
+                        Debug.Log(spawned[i, j - 1].GetComponent<BallData>().getNum() + " Obj2 Value");
+                        Debug.Log(spawned[i, j + 1].GetComponent<BallData>().getNum() + " Obj3 Value");
                         if (spawned[i, j] == spawned[i, j - 1] && spawned[i, j] == spawned[i, j + 1])
                         {
                             Debug.Log("junta os bloquinhos 3");

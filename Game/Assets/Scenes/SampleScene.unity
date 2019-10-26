@@ -267,7 +267,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 62d36fd43b5ed2849ac14ec0c65473f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_FlipX: 1
@@ -715,7 +715,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 824922bf201992440b2f8e79450a2008, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_FlipX: 1
@@ -874,7 +874,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 824922bf201992440b2f8e79450a2008, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_FlipX: 0
@@ -1244,19 +1244,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4724292862753465548}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &999410802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999410801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a735480fb476488da03cebfd8694440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentNum: 1
 --- !u!4 &999410805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4724292863381514425, guid: 55decb608e5804dc8a5b2c9ef3ac704c,
@@ -1441,7 +1428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnBlockTimer: 5
-  FallingBlockVelocity: 0.02
+  FallingBlockVelocity: 0.01
   ballValue: {fileID: 1014248227}
 --- !u!1 &1331919902
 GameObject:
@@ -1511,7 +1498,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 62d36fd43b5ed2849ac14ec0c65473f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_FlipX: 0
@@ -1888,8 +1875,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4724292863381514426, guid: 55decb608e5804dc8a5b2c9ef3ac704c, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55decb608e5804dc8a5b2c9ef3ac704c, type: 3}
 --- !u!1001 &4886350213343092565
 PrefabInstance:

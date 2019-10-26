@@ -32,17 +32,15 @@ public class BlockManager : MonoBehaviour
     {
         if (collision.transform.tag == "Tirinho")
         {
-            int playerNum = Player.gameObject.GetComponent<BallData>().getNum();
-
-            Debug.Log(playerNum + " Player NUM " + BlockValue + " Block ");
+            int playerNum = collision.gameObject.GetComponent<BallData>().getNum();
 
             if (playerNum == BlockValue) {
                 // spawn abaixo da posicao do bloco
                 Player.gameObject.GetComponent<SpawnBall>().respawnBall(this.transform.position.x);
                 BlockValue *= 2;
                 updateBlockText();
-                MergeBlocks.Instance.MergeCheck(this.gameObject);
                 // junta os blocos
+                MergeBlocks.Instance.MergeCheck(this.gameObject);
             }
 
         }

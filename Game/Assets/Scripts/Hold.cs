@@ -23,13 +23,17 @@ public class Hold : MonoBehaviour
     // Spawn da bola onde ele acertar um bloco valido, se ele nao acertar nada o spawn é onde a bola acertar no chao
     // fazer uma mira que vc escolhe para onde a bola vai
 
-    private BallData data;
+    private int currentValue = 1;
+
+        // Precisa pegar o Ball Data do ultimo tiro
+
+    //private BallData data;
 
     private TextMeshProUGUI bolinhaText;
 
     private void Start()
     {
-        data = Player.GetComponent<BallData>();
+        //data = Player.GetComponent<BallData>();
 
         bolinhaText = Bolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
@@ -41,10 +45,7 @@ public class Hold : MonoBehaviour
     {
         holding = true;
 
-        data.updateNum(MinChargeNum);
-
-        Debug.Log("Numero valor "  + data.getNum());
-
+        currentValue = 1;
     }
 
     private void OnMouseUp()
@@ -54,7 +55,7 @@ public class Hold : MonoBehaviour
 
         // pega a direcao do mouse e aplica a forca na bolinha
         Vector3 direction = (-1)*(Player.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
-        Player.GetComponent<ThrowBall>().ThrowBallInDirection(direction);
+        Player.GetComponent<ThrowBall>().ThrowBallInDirection(direction, currentValue);
 
     }
 
@@ -67,15 +68,11 @@ public class Hold : MonoBehaviour
             if (holdTime >= TimeToGrowForce) {
                 holdTime = 0;
 
-                if (data.getNum() < MaxChargeNum)
+                if (currentValue < MaxChargeNum)
                 {
+                    currentValue *= 2;
 
-                    Debug.Log("ASDADFASDF");
-
-                    data.updateNum(data.getNum() * 2);
-
-                    Debug.Log("Numero valor again " + data.getNum());
-                    bolinhaText.text = data.getNum().ToString();
+                    bolinhaText.text = currentValue.ToString();
                 }
             }
         }
