@@ -48,8 +48,9 @@ public class Hold : MonoBehaviour
         holding = false;
         timer = 0;
 
-        // Mandar o valor da forca pra bolinha no tiro? para algum script
-
+        // pega a direcao do mouse e aplica a forca na bolinha
+        Vector3 direction = (-1)*(Bolinha.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
+        Bolinha.GetComponent<ThrowBall>().ThrowBallInDirection(direction);
     }
 
     private void Update()
