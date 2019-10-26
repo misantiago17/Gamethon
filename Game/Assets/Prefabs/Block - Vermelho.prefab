@@ -117,6 +117,26 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.95238096
       objectReference: {fileID: 0}
+    - target: {fileID: 2116299983450146587, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
+        type: 3}
+      propertyPath: m_text
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116299983450146587, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
+        type: 3}
+      propertyPath: m_margin.x
+      value: 14.564859
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116299983450146587, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
+        type: 3}
+      propertyPath: m_fontColor.a
+      value: 0.627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 2116299983450146587, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 2701131775
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d43604ba1c1f0481c8b1d6faa1afbaa9, type: 3}
 --- !u!1 &5377892188418258322 stripped
