@@ -15,4 +15,7 @@ public class BallData : MonoBehaviour
     {
         return CurrentNum;
     }
+
+    /// tiro morre quando colide ou bate no chao
+    /// 
 }

@@ -21,6 +21,13 @@ public class BlockManager : MonoBehaviour
         if (collision.transform.name == "Player")
         {
             int playerNum = collision.gameObject.GetComponent<BallData>().getNum();
+
+            if (playerNum == BlockValue) {
+                // spawn abaixo da posicao do bloco
+                collision.gameObject.GetComponent<SpawnBall>().respawnBall(this.transform.position.x);
+                // junta os blocos
+            }
+
         }
     }
 }
