@@ -33,6 +33,10 @@ public class BallData : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = sprites[3];
         }
+        if (CurrentNum == 16)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprites[4];
+        }
     }
 
     public int getNum()

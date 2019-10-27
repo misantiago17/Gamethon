@@ -16,7 +16,7 @@ public class Hold : MonoBehaviour
     private float holdTime = 0;
 
     // O numero inicial é 4, quando ele quebra um bloco que vale mais que 4, ele passa a ser o novo máximo
-    private int MaxChargeNum = 8;
+    private int MaxChargeNum = 16;
     // A partir de certo numero quebrado ele atualiza o novo minimo do jogo
     private int MinChargeNum = 1;
 
@@ -31,7 +31,7 @@ public class Hold : MonoBehaviour
 
     private TextMeshProUGUI bolinhaText;
 
-    public Sprite[] sprites;
+    //public Sprite[] sprites;
 
     private void Start()
     {
@@ -70,7 +70,7 @@ public class Hold : MonoBehaviour
             currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[3];
         }
         */
-        currentBolinha.GetComponent<BallData>().CurrentNum = currentValue;
+        
     }
 
 	private void OnMouseUp()
@@ -95,8 +95,8 @@ public class Hold : MonoBehaviour
                 {
                     currentValue *= 2;
                     bolinhaText.text = currentValue.ToString();
-                    
-                    
+                    currentBolinha.GetComponent<BallData>().CurrentNum = currentValue;
+
                 }
             }
         }
