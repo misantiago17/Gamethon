@@ -16,6 +16,11 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    public void toMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     // Update is called once per frame
     void Update()
     {
