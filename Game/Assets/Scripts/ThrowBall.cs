@@ -13,16 +13,11 @@ public class ThrowBall : MonoBehaviour
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
     }
 
-    public void ThrowBallInDirection(Vector3 direction, int value)
+    public void ThrowBallInDirection(Vector3 direction, int value, GameObject ball)
     {
-        // Forca ta muito lunar
-        GameObject tirin = GameObject.Instantiate(tirinho, this.transform.position, this.transform.rotation);
-        tirin.GetComponent<BallData>().updateNum(value);
-        tirin.GetComponent<Rigidbody2D>().velocity = Force * direction;
+        ball.GetComponent<BallData>().updateNum(value);
+        ball.GetComponent<Rigidbody2D>().velocity = Force * direction;
         gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Shoot");
-
-        //float step = 0.2f * Time.deltaTime;
-
 
         //Rotate Pointer towards mouse
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

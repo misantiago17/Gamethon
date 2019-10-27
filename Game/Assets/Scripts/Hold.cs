@@ -25,7 +25,9 @@ public class Hold : MonoBehaviour
 
     private int currentValue = 1;
 
-        // Precisa pegar o Ball Data do ultimo tiro
+    // Precisa pegar o Ball Data do ultimo tiro
+
+    private GameObject currentBolinha;
 
     private TextMeshProUGUI bolinhaText;
 
@@ -42,17 +44,20 @@ public class Hold : MonoBehaviour
         holding = true;
 
         currentValue = 1;
+
+        currentBolinha = GameObject.Instantiate(Bolinha, Player.transform.position, this.transform.rotation);
+        bolinhaText = currentBolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        // Instanci bolinha
     }
 
-    private void OnMouseUp()
+	private void OnMouseUp()
     {
         holding = false;
         timer = 0;
 
         // pega a direcao do mouse e aplica a forca na bolinha
         Vector3 direction = (-1)*(Player.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
-        Player.GetComponent<ThrowBall>().ThrowBallInDirection(direction, currentValue);
-
+        Player.GetComponent<ThrowBall>().ThrowBallInDirection(direction, currentValue, currentBolinha);
     }
 
     private void Update()
@@ -67,7 +72,6 @@ public class Hold : MonoBehaviour
                 if (currentValue < MaxChargeNum)
                 {
                     currentValue *= 2;
-
                     bolinhaText.text = currentValue.ToString();
                 }
             }

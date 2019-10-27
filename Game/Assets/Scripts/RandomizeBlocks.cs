@@ -163,6 +163,7 @@ public class RandomizeBlocks : MonoBehaviour
 
             if (blockPres[i] != 0)
             {
+                Debug.Log("i: " + i);
                 SpawnedBlocks[numLines, i] = BlockGrid.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], blockPres[i]);
             }
         }
