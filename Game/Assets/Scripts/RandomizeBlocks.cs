@@ -18,6 +18,8 @@ public class RandomizeBlocks : MonoBehaviour
 
     private int numLines = 0;
 
+    [HideInInspector] public int initLine = 0;
+
     private static RandomizeBlocks _instance;
 
     public static RandomizeBlocks Instance { get { return _instance; } }
@@ -163,7 +165,6 @@ public class RandomizeBlocks : MonoBehaviour
 
             if (blockPres[i] != 0)
             {
-                //Debug.Log("i: " + i);
                 SpawnedBlocks[numLines, i] = BlockGrid.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], blockPres[i]);
             }
         }
