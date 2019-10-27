@@ -48,11 +48,11 @@ public class MergeBlocks : MonoBehaviour
     public bool MergeCheck(GameObject bloquinho)
     {
         int lineInitial = RandomizeBlocks.Instance.initLine;
-        //Debug.Log("linha inicial: " + lineInitial);
+        Debug.Log("linha inicial: " + lineInitial);
 
         GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
 
-        for (int i = lineInitial; i < lineInitial + BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+        for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
         {
             for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
             {
@@ -68,7 +68,7 @@ public class MergeBlocks : MonoBehaviour
                             {
                                 if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
                                 {
-                                    //Debug.Log("Primeiro")
+                                    Debug.Log("Primeiro");
                                     Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
                                     currentPoints += PontoMerge;
                                     updateTextPoints();
@@ -84,7 +84,7 @@ public class MergeBlocks : MonoBehaviour
                                 //Debug.Log("i:" + i + "j:" + j);
                                 if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
                                 {
-                                    //Debug.Log("Ultimo");
+                                    Debug.Log("Ultimo");
                                     Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, false);
                                     currentPoints += PontoMerge;
                                     updateTextPoints();
@@ -102,7 +102,7 @@ public class MergeBlocks : MonoBehaviour
                             && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
                             {
                                 //Debug.Log("i:" + i + "j:" + j);
-                                //Debug.Log("Caso de tres");
+                                Debug.Log("Caso de tres");
                                 Merge(spawned[i, j], spawned[i, j - 1], spawned[i, j + 1], spawned, i, j, false);
                                 currentPoints += PontoMergeTriplo;
                                 updateTextPoints();
