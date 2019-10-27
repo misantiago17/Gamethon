@@ -2040,8 +2040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9015cabc0314c11a2372ffe8053562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnBlockTimer: 5
-  FallingBlockVelocity: 0.003
+  SpawnBlockTimer: 30
+  FallingBlockVelocity: 0.001
   ballValue: {fileID: 1014248227}
   initLine: 0
 --- !u!1 &1331919902
