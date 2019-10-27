@@ -30,9 +30,11 @@ public class MergeBlocks : MonoBehaviour
     public void MergeCheck(GameObject bloquinho)
     {
         GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
+
         int count = 4;
         while (count > 0)
         {
+
             for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
             {
                 for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
