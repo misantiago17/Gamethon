@@ -24,13 +24,14 @@ public class ThrowBall : MonoBehaviour
         //float step = 0.2f * Time.deltaTime;
 
 
-        Vector3 diff = Camera.main.ScreenToWorldPoint(direction) - transform.position;
-        diff.Normalize();
+        //Rotate Pointer towards mouse
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        gameObject.transform.GetChild(0).transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - gameObject.transform.GetChild(0).transform.position);
 
-        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        gameObject.transform.GetChild(0).transform.rotation = Quaternion.Euler(0f, 0f, rot_z + 225);
+    }
+
     }
 
 
 
-}
+
