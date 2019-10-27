@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlockKiller : MonoBehaviour
 {
+    public GameObject LosePanel;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("Block"))
@@ -21,6 +24,7 @@ public class BlockKiller : MonoBehaviour
 
                         RandomizeBlocks.Instance.initLine++;
 
+                        LosePanel.SetActive(true);
                         // Condição de derrota
                     }
                 }

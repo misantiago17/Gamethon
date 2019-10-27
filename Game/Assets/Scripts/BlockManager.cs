@@ -88,9 +88,9 @@ public class BlockManager : MonoBehaviour
                     }
                 }
 
-                Debug.Log("Index: " + index);
+                //Debug.Log("Index: " + index);
 
-                Debug.Log("---------------------");
+                //Debug.Log("---------------------");
 
                 // junta os blocos
                 MergeBlocks.Instance.MergeCheck(this.gameObject);
@@ -108,7 +108,7 @@ public class BlockManager : MonoBehaviour
                             {
                                 MergeBlocks.Instance.
                                     MergeCheck(spawned[index, j]);
-                                Debug.Log("Reverifiquei");
+                                //Debug.Log("Reverifiquei");
                             }
                         }
                         else
@@ -126,7 +126,7 @@ public class BlockManager : MonoBehaviour
                         count++;
                 }
 
-                Debug.Log("Numero de itens na linha: " + count);
+                //Debug.Log("Numero de itens na linha: " + count);
 
                 if (count == 1)
                 {
@@ -134,7 +134,7 @@ public class BlockManager : MonoBehaviour
                     {
                         if (spawned[index, j] != null)
                         {
-                            Debug.Log("Apaguei linha sozinha");
+                            //Debug.Log("Apaguei linha sozinha");
                             Destroy(spawned[index, j].gameObject);
                             spawned[index, j] = null;
                             RandomizeBlocks.Instance.initLine++;
