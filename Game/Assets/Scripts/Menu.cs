@@ -11,6 +11,11 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void GoToGame2()
+    {
+        SceneManager.LoadScene(2);
+    }
+
     // Update is called once per frame
     void Update()
     {
