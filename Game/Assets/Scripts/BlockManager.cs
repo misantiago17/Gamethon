@@ -162,8 +162,7 @@ public class BlockManager : MonoBehaviour
 
         while (wait)
         {
-            yield return new WaitForSeconds(3f);
-            wait = false;
+            yield return new WaitForSeconds(1.0f);
 
             for (int i=RandomizeBlocks.Instance.initLine;i< RandomizeBlocks.Instance.initLine + BlockGrid.Instance.numHorizontalBlocks - 2; i++)
             {
@@ -171,8 +170,13 @@ public class BlockManager : MonoBehaviour
                 {
                     if (RandomizeBlocks.Instance.SpawnedBlocks[i,j] == this.gameObject)
                     {
-                        RandomizeBlocks.Instance.SpawnedBlocks[i, j] = null;
-                        Destroy(this.gameObject);
+                        if (RandomizeBlocks.Instance.SpawnedBlocks[i, j - 1] == null && RandomizeBlocks.Instance.SpawnedBlocks[i, j + 1] == null)
+                        {
+                            RandomizeBlocks.Instance.SpawnedBlocks[i, j] = null;
+                            Destroy(this.gameObject);
+                            wait = false;
+                        }
+     
                     }
                 }
             }
