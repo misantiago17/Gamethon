@@ -75,8 +75,47 @@ public class BlockManager : MonoBehaviour
                 BlockValue *= 2;
                 updateBlockText();
                 //gameObject.GetComponent<Animator>().SetTrigger("Death");
+
+                GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
+
+                int index = 0;
+                for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+                {
+                    for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
+                    {
+                        if (spawned[i, j] == this.gameObject)
+                            index = j;
+                    }
+                }
+
                 // junta os blocos
                 MergeBlocks.Instance.MergeCheck(this.gameObject);
+
+                bool acabouRepticoes = false;
+
+                // Após isso verifica se a linha tem valor repetido entre si após o merge
+                while (!acabouRepticoes)
+                {
+                    for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
+                    {
+                        if (j != BlockGrid.Instance.numHorizontalBlocks - 3)
+                        {
+                            if (spawned[index, j] == spawned[index, j++])
+                            {
+                                MergeBlocks.Instance.MergeCheck(spawned[index, j]);
+                                Debug.Log("ENTREI AA");
+                            }
+                        }
+                        else
+                        {
+                            acabouRepticoes = true;
+                        }
+                    }
+                }
+
+                // 
+
+
             }
 
         }

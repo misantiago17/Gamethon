@@ -35,50 +35,67 @@ public class MergeBlocks : MonoBehaviour
         {
             for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
             {
-                if (spawned[i, j] == bloquinho)
+                if(spawned[i, j] != null)
                 {
+                    if (spawned[i, j] == bloquinho)
+                    {
+                        // primeiro elemento da linha
+                        if (j == 0)
+                        {
 
-                    if (j == 0)
-                    {
-                        if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
-                        {
-                            Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
-                            return true;
-                        }
-                    }
-                    else if (j == BlockGrid.Instance.numHorizontalBlocks - 3)
-                    {
-                        if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
-                        {
-                            Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, false);
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        if(spawned[i, j - 1] != null && spawned[i, j + 1] != null)
-                        {
-                            if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue
-                            && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
+                            if (spawned[i, j + 1] != null)
                             {
-                                Merge(spawned[i, j], spawned[i, j - 1], spawned[i, j + 1], spawned, i, j, false);
+                                if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
+                                {
+                                    Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
+                                    return true;
+                                }
+                            }
+
+                        }
+                        else if (j == BlockGrid.Instance.numHorizontalBlocks - 3) // ultimo
+                        {
+                            if (spawned[i, j - 1] != null)
+                            {
+                                if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
+                                {
+                                    Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, false);
+                                    return true;
+                                }
+                            }
+                            
+                        }
+                        else
+                        {
+
+                            if (spawned[i, j - 1] != null && spawned[i, j + 1] != null)
+                            {
+                                if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue
+                                && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
+                                {
+                                    Merge(spawned[i, j], spawned[i, j - 1], spawned[i, j + 1], spawned, i, j, false);
+                                    return true;
+                                }
+                            }
+
+                          
+                            else if (spawned[i, j - 1] != null && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
+                            {
+                                Merge(spawned[i, j], spawned[i, j - 1], null, spawned, i, j, false);
                                 return true;
                             }
-                        }
+                            
+                 
+                            else if (spawned[i, j + 1] != null && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
+                            {
+                                Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
+                                return true;
+                            }
 
-                        else if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
-                        {
-                            Merge(spawned[i, j], spawned[i, j - 1], null, spawned, i, j, false);
-                            return true;
                         }
-                        else if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
-                        {
-                            Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
-                            return true;
-                        }
-
                     }
                 }
+                
             }
         }
 

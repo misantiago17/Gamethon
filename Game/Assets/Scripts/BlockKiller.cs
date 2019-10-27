@@ -8,7 +8,6 @@ public class BlockKiller : MonoBehaviour
     {
         if (collision.transform.CompareTag("Block"))
         {
-            Debug.Log("ENTREI 1");
             GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
 
             for(int i=0; i<BlockGrid.Instance.numHorizontalBlocks - 2; i++)
@@ -17,9 +16,10 @@ public class BlockKiller : MonoBehaviour
                 {
                     if(spawned[i,j] == collision.gameObject)
                     {
-                        Debug.Log("ENTREI 2");
                         spawned[i, j] = null;
                         Destroy(collision.gameObject);
+
+                        RandomizeBlocks.Instance.initLine++;
 
                         // Condição de derrota
                     }
