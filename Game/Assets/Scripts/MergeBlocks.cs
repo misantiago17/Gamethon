@@ -25,82 +25,64 @@ public class MergeBlocks : MonoBehaviour
         }
     }
 
-    // recebe a instancia do bloco
 
+    // Verifica se há merges para serem feitos, fazer isso enquanto ?
     public void MergeCheck(GameObject bloquinho)
     {
         GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
-        
-        for(int i=0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+        int count = 4;
+        while (count > 0)
         {
-            for (int j=0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
+            for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
             {
-                if (spawned[i,j] == bloquinho)
+                for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
                 {
-
-                    if (j == 0)
+                    if (spawned[i, j] == bloquinho)
                     {
-                        Debug.Log("junta os bloquinhos A");
 
-
-                        Debug.Log("i: " + i + " j: " + j);
-
-                        Debug.Log(spawned[i, j].GetComponent<BallData>().getNum() + " Obj1 Value");
-                        Debug.Log(spawned[i, j + 1].GetComponent<BallData>().getNum() + " Obj2 Value");
-
-                        if (spawned[i, j] == spawned[i, j + 1]) {
-                            Debug.Log("junta os bloquinhos 1");
-                            Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
-                        }
-                    }
-                    else if (j == BlockGrid.Instance.numHorizontalBlocks - 3)
-                    {
-                        Debug.Log("junta os bloquinhos B");
-
-                        Debug.Log("i: " + i + " j: " + j);
-
-                        Debug.Log(spawned[i, j].GetComponent<BallData>().getNum() + " Obj1 Value");
-                        Debug.Log(spawned[i, j - 1].GetComponent<BallData>().getNum() + " Obj2 Value");
-                        if (spawned[i, j] == spawned[i, j - 1])
+                        if (j == 0)
                         {
-                            Debug.Log("junta os bloquinhos 2");
-                            Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, false);
+                            if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
+                            {
+                                Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
+                            }
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("junta os bloquinhos C");
-
-                        Debug.Log("i: " + i + " j: " + j);
-
-                        Debug.Log(spawned[i, j].GetComponent<BallData>().getNum() + " Obj1 Value");
-                        Debug.Log(spawned[i, j - 1].GetComponent<BallData>().getNum() + " Obj2 Value");
-                        Debug.Log(spawned[i, j + 1].GetComponent<BallData>().getNum() + " Obj3 Value");
-                        if (spawned[i, j] == spawned[i, j - 1] && spawned[i, j] == spawned[i, j + 1])
+                        else if (j == BlockGrid.Instance.numHorizontalBlocks - 3)
                         {
-                            Debug.Log("junta os bloquinhos 3");
-                            Merge(spawned[i, j], spawned[i, j - 1], spawned[i, j + 1], spawned, i, j, false);
+                            if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
+                            {
+                                Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, false);
+                            }
                         }
+                        else
+                        {
+                            if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue
+                                && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
+                            {
+                                Merge(spawned[i, j], spawned[i, j - 1], spawned[i, j + 1], spawned, i, j, false);
+                            }
 
-                        if (spawned[i, j] == spawned[i, j - 1])
-                        {
-                            Debug.Log("junta os bloquinhos 4");
-                            Merge(spawned[i, j], spawned[i, j - 1], null, spawned, i, j, false);
-                        } else  if (spawned[i, j] == spawned[i, j + 1])
-                        {
-                            Debug.Log("junta os bloquinhos 5");
-                            Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
+                            else if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
+                            {
+                                Merge(spawned[i, j], spawned[i, j - 1], null, spawned, i, j, false);
+                            }
+                            else if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
+                            {
+                                Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
+                            }
+
                         }
-
                     }
                 }
             }
+
+            count--;
         }
 
+        
 
     }
 
-    // ideia que seja recursivo (vá juntando os iguais)
 
     // Se for o caso de duplas, apaga o menor e vai para o de maior valor, se for o caso de pontas 
     void Merge(GameObject obj1, GameObject obj2, GameObject obj3, GameObject[,] spawned, int i, int j, bool right)
@@ -108,18 +90,42 @@ public class MergeBlocks : MonoBehaviour
         // caso onde da merge nos três - aumenta o valor do obj1, some os dois do lado e junta os dos lados
         if (obj3 != null)
         {
-            obj3.GetComponent<BlockManager>().BlockValue *= 2;
-            obj3.GetComponent<BlockManager>().updateBlockText();
+            //Debug.Log("CASO DE 3 ITENS");
 
+            spawned[i, j].GetComponent<BlockManager>().BlockValue = spawned[i, j+1].GetComponent<BlockManager>().BlockValue * 2;
+            spawned[i, j].GetComponent<BlockManager>().updateBlockText();
+
+            //Debug.Log("VALOR CENTRO " + obj2.GetComponent<BlockManager>().BlockValue);
+
+            float auxPosXPre1 = spawned[i, j-1].transform.position.x;
+            float auxPosXPos1 = auxPosXPre1;
+            Destroy(spawned[i, j - 1].gameObject);
             spawned[i, j - 1] = null;
+
+            float auxPosXPre2 = spawned[i, j+1].transform.position.x;
+            float auxPosXPos2 = auxPosXPre2;
+            Destroy(spawned[i, j + 1].gameObject);
             spawned[i, j + 1] = null;
 
-            int k = j - 1;
-            while(k > 0){
+            // ate aqui ta tudo certo
+
+            int k = j;
+            while (k > 0)
+            {
                 k -= 1;
-                if (spawned[i, k] != null) {
+                if (spawned[i, k] != null)
+                {
+                    auxPosXPre1 = spawned[i, k].transform.position.x;
+                    spawned[i, k].transform.position = new Vector3(auxPosXPos1, spawned[i, k].transform.position.y);
                     spawned[i, k + 1] = spawned[i, k];
+
+                    // isso aqui ta errado?
+                    //auxPosXPre1 = spawned[i, k].transform.position.x;
+                    auxPosXPos1 = auxPosXPre1;
                     spawned[i, k] = null;
+
+                    //Debug.Log("VALOR ESQ " + spawned[i, k + 1].GetComponent<BlockManager>().BlockValue);
+
                 }
             }
 
@@ -129,35 +135,89 @@ public class MergeBlocks : MonoBehaviour
                 k += 1;
                 if (spawned[i, k] != null)
                 {
+                    auxPosXPre2 = spawned[i, k].transform.position.x;
+                    spawned[i, k].transform.position = new Vector3(auxPosXPos2, spawned[i, k].transform.position.y);
                     spawned[i, k - 1] = spawned[i, k];
+                    //auxPosXPre2 = spawned[i, k].transform.position.x;
+                    auxPosXPos2 = auxPosXPre2;
                     spawned[i, k] = null;
+
+
+                    //Debug.Log("VALOR DIR " + spawned[i, k - 1].GetComponent<BlockManager>().BlockValue);
+
+                    //spawned[i, k - 1].transform.position = BlockGrid.Instance.getPosInMap(i, k + 1);
                 }
             }
 
         // Caso normal (ele vai para o bloco de maior peso)
         } else {
 
+            //Debug.Log("CASO JUNTA MAIOR");
+
+            float auxPosXPre = spawned[i, j].transform.position.x;
+            float auxPosXPos = auxPosXPre;
+
+            Destroy(spawned[i, j].gameObject);
             spawned[i, j] = null;
-            obj2.GetComponent<BlockManager>().BlockValue *= 2;
-            obj2.GetComponent<BlockManager>().updateBlockText();
+
 
             if (right)
             {
-                spawned[i, j + 1] = null;
+                //Debug.Log("SE MAIOR A DIREITA");
 
-                int k = j - 1;
-                while (k > 0) {
+                spawned[i, j + 1].GetComponent<BlockManager>().BlockValue *= 2;
+                spawned[i, j + 1].GetComponent<BlockManager>().updateBlockText();
+
+                //Debug.Log("VALOR MAIOR " + spawned[i, j + 1].GetComponent<BlockManager>().BlockValue);
+
+                // O maior valor fica parado, exclui o valor menor
+
+                //auxPosXPre = spawned[i, j + 1].transform.position.x;
+                //spawned[i, j + 1].transform.position = new Vector3(auxPosXPos, spawned[i, j + 1].transform.position.y);
+                //auxPosXPos = auxPosXPre;
+                //spawned[i, j] = spawned[i, j + 1];
+                //spawned[i, j + 1] = null;
+
+                int k = j;
+                while (k > 0)
+                {
                     k -= 1;
                     if (spawned[i, k] != null)
                     {
+                        auxPosXPre = spawned[i, k].transform.position.x;
+                        spawned[i, k].transform.position = new Vector3(auxPosXPos, spawned[i, k].transform.position.y);
                         spawned[i, k + 1] = spawned[i, k];
+
+                        // isso aqui ta errado?
+                        //auxPosXPre = spawned[i, k].transform.position.x;
+                        auxPosXPos = auxPosXPre;    
                         spawned[i, k] = null;
+
+                        //Debug.Log("VALOR ESQ " + spawned[i, k + 1].GetComponent<BlockManager>().BlockValue);
+
                     }
                 }
 
             } else
             {
-                spawned[i, j - 1] = null;
+                //Debug.Log("SE MAIOR A ESQUERDA");
+
+                spawned[i, j - 1].GetComponent<BlockManager>().BlockValue *= 2;
+                spawned[i, j - 1].GetComponent<BlockManager>().updateBlockText();
+
+                //Debug.Log("VALOR MAIOR " + spawned[i, j - 1].GetComponent<BlockManager>().BlockValue);
+
+                // O maior valor fica parado, exclui o valor menor
+
+                //auxPosXPre = spawned[i, j - 1].transform.position.x;
+                //spawned[i, j - 1].transform.position = new Vector3(auxPosXPos, spawned[i, j - 1].transform.position.y);
+                //auxPosXPos = auxPosXPre;
+                //spawned[i, j] = spawned[i, j - 1];
+                //spawned[i, j-1] = null;
+
+                // Puxa os demais a esquerda para o lado do maior
+
+                // ate aqui certo
 
                 int k = j;
                 while (k < BlockGrid.Instance.numHorizontalBlocks - 2)
@@ -165,8 +225,17 @@ public class MergeBlocks : MonoBehaviour
                     k += 1;
                     if (spawned[i, k] != null)
                     {
+                        auxPosXPre = spawned[i, k].transform.position.x;
+                        spawned[i, k].transform.position = new Vector3(auxPosXPos, spawned[i, k].transform.position.y);
                         spawned[i, k - 1] = spawned[i, k];
+                        //auxPosXPre = spawned[i, k].transform.position.x;
+                        auxPosXPos = auxPosXPre;
                         spawned[i, k] = null;
+
+
+                        //Debug.Log("VALOR DIR " + spawned[i, k - 1].GetComponent<BlockManager>().BlockValue);
+
+                        //spawned[i, k - 1].transform.position = BlockGrid.Instance.getPosInMap(i, k + 1);
                     }
                 }
 
@@ -174,15 +243,5 @@ public class MergeBlocks : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

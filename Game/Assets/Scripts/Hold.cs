@@ -27,14 +27,10 @@ public class Hold : MonoBehaviour
 
         // Precisa pegar o Ball Data do ultimo tiro
 
-    //private BallData data;
-
     private TextMeshProUGUI bolinhaText;
 
     private void Start()
     {
-        //data = Player.GetComponent<BallData>();
-
         bolinhaText = Bolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
         // freeze a rotacao da bolinha para fazer o trail

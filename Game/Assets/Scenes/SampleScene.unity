@@ -1322,7 +1322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 999410801}
   Bolinha: {fileID: 825894793}
-  TimeToGrowForce: 1
+  TimeToGrowForce: 0.7
 --- !u!1 &1180888647
 GameObject:
   m_ObjectHideFlags: 0
