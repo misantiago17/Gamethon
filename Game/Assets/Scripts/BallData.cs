@@ -43,10 +43,6 @@ public class BallData : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().sprite = sprites[4];
             GameObject.FindGameObjectWithTag("Aura").GetComponent<SpriteRenderer>().color = auraColors[4];
         }
-        else
-        {
-            GameObject.FindGameObjectWithTag("Aura").GetComponent<SpriteRenderer>().color = new Color(255,255,255,0);
-        }
     }
 
     public int getNum()
