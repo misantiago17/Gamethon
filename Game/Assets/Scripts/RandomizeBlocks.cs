@@ -169,7 +169,7 @@ public class RandomizeBlocks : MonoBehaviour
             }
         }
 
-        if (numLines == 12)
+        if (numLines == 30)
             numLines = 0;
         else
             numLines++;
@@ -181,7 +181,7 @@ public class RandomizeBlocks : MonoBehaviour
     {
         while (true)
         {
-            for(int i = 0; i < 12; i++)
+            for(int i = 0; i < 30; i++)
             {
                 for (int j=0; j<6; j++)
                 {
@@ -192,7 +192,7 @@ public class RandomizeBlocks : MonoBehaviour
                 }
             }
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.02f);
         }
     }
     

@@ -7,7 +7,7 @@ public class ThrowBall : MonoBehaviour
     public GameObject tirinho;
 
     public float Force = 10f;
-
+    public AudioSource audioTiro;
     private void Start()
     {
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -19,7 +19,7 @@ public class ThrowBall : MonoBehaviour
         ball.GetComponent<Rigidbody2D>().velocity = Force * direction;
         gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Shoot");
         gameObject.GetComponentInChildren<ParticleSystem>().Play();
-
+        audioTiro.PlayOneShot(audioTiro.clip,audioTiro.volume);
         //Rotate Pointer towards mouse
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         gameObject.transform.GetChild(0).transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - gameObject.transform.GetChild(0).transform.position);

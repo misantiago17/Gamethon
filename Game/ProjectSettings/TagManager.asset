@@ -8,6 +8,7 @@ TagManager:
   - Block
   - Aura
   - music
+  - PunchSFX
   layers:
   - Default
   - TransparentFX

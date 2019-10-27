@@ -49,10 +49,11 @@ public class MergeBlocks : MonoBehaviour
     {
         int lineInitial = RandomizeBlocks.Instance.initLine;
         Debug.Log("linha inicial: " + lineInitial);
+        Debug.Log("linha final: " + (lineInitial + BlockGrid.Instance.numHorizontalBlocks - 2));
 
         GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
 
-        for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+        for (int i = lineInitial; i < lineInitial + BlockGrid.Instance.numHorizontalBlocks - 2; i++)
         {
             for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
             {
@@ -95,8 +96,8 @@ public class MergeBlocks : MonoBehaviour
                         }
                         else
                         {
+                            //Debug.Log() // Verificar bug do 8
 
-                            
                             if (spawned[i, j - 1] != null && spawned[i, j + 1] != null &&
                                 spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue
                             && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
