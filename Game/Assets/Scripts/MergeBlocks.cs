@@ -8,6 +8,7 @@ public class MergeBlocks : MonoBehaviour
     // se tiver o mesmo valor do bloco o bloco faz um merge com o bloco adjacente que tiver o mesmo valor dele
     // se nao tiver bloco adjacente com mesmo valor só aumenta em *2 o valor
 
+    public GameObject PointEffect;
 
     private static MergeBlocks _instance;
 
@@ -118,6 +119,9 @@ public class MergeBlocks : MonoBehaviour
         // caso onde da merge nos três - aumenta o valor do obj1, some os dois do lado e junta os dos lados
         if (obj3 != null)
         {
+            //Point Effector
+            //Instantiate(PointEffect, spawned[i, j - 1].transform.position, Quaternion.identity);
+            Instantiate(PointEffect, spawned[i, j].transform.position, Quaternion.identity);
 
             spawned[i, j].GetComponent<BlockManager>().BlockValue = spawned[i, j+1].GetComponent<BlockManager>().BlockValue * 2;
             spawned[i, j].GetComponent<BlockManager>().updateBlockText();
@@ -164,6 +168,9 @@ public class MergeBlocks : MonoBehaviour
 
         // Caso normal (ele vai para o bloco de maior peso)
         } else {
+
+            //Point Effector
+            Instantiate(PointEffect, spawned[i, j].transform.position, Quaternion.identity);
 
             float auxPosXPre = spawned[i, j].transform.position.x;
             float auxPosXPos = auxPosXPre;

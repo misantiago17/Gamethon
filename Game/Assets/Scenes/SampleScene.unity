@@ -2048,6 +2048,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f0e5095e7ca467a84802087b6d4848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PointEffect: {fileID: 2731652194439991667, guid: 616c414d5b5b4d34892ec2dfa708e50c,
+    type: 3}
 --- !u!114 &1208609780
 MonoBehaviour:
   m_ObjectHideFlags: 0
