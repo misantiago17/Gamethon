@@ -16,7 +16,7 @@ public class Hold : MonoBehaviour
     private float holdTime = 0;
 
     // O numero inicial é 4, quando ele quebra um bloco que vale mais que 4, ele passa a ser o novo máximo
-    private int MaxChargeNum = 16;
+    private int MaxChargeNum = 8;
     // A partir de certo numero quebrado ele atualiza o novo minimo do jogo
     private int MinChargeNum = 1;
 
