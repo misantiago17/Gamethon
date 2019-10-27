@@ -14,7 +14,7 @@ public class RandomizeBlocks : MonoBehaviour
 
     private float timer = 0;
 
-    [HideInInspector] public GameObject[,] SpawnedBlocks = new GameObject[12,6];
+    [HideInInspector] public GameObject[,] SpawnedBlocks = new GameObject[500,6];
 
     private int numLines = 0;
 
@@ -163,7 +163,7 @@ public class RandomizeBlocks : MonoBehaviour
 
             if (blockPres[i] != 0)
             {
-                Debug.Log("i: " + i);
+                //Debug.Log("i: " + i);
                 SpawnedBlocks[numLines, i] = BlockGrid.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], blockPres[i]);
             }
         }

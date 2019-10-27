@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tirinho
+  - Block
   layers:
   - Default
   - TransparentFX

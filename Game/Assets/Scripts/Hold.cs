@@ -62,7 +62,6 @@ public class Hold : MonoBehaviour
 
     private void Update()
     {
-
         if (holding) {
             holdTime += Time.deltaTime;
 
