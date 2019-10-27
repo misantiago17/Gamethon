@@ -18,6 +18,7 @@ public class ThrowBall : MonoBehaviour
         ball.GetComponent<BallData>().updateNum(value);
         ball.GetComponent<Rigidbody2D>().velocity = Force * direction;
         gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Shoot");
+        gameObject.GetComponentInChildren<ParticleSystem>().Play();
 
         //Rotate Pointer towards mouse
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
