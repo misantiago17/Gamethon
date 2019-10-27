@@ -2449,7 +2449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnBlockTimer: 15
-  FallingBlockVelocity: 0.001
+  FallingBlockVelocity: 0.01
   ballValue: {fileID: 1014248227}
   initLine: 0
 --- !u!1 &1331919902
