@@ -39,6 +39,7 @@ public class BlockManager : MonoBehaviour
                 Player.gameObject.GetComponent<SpawnBall>().respawnBall(this.transform.position.x);
                 BlockValue *= 2;
                 updateBlockText();
+                gameObject.GetComponent<Animator>().SetTrigger("Death");
                 // junta os blocos
                 MergeBlocks.Instance.MergeCheck(this.gameObject);
             }

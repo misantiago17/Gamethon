@@ -1,24 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!95 &2132043125899450285
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231607334086402677}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fb1ecb58c3a3c1a42b2cda60e323f7c6, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &885264946239818985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86,42 +67,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2116299983962943121, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: cb646db4239bdc54bb560e4b505ee108,
-        type: 3}
-    - target: {fileID: 2116299983962943121, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2116299983962943121, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2116299983962943121, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2116299983962943122, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.95238096
-      objectReference: {fileID: 0}
-    - target: {fileID: 2116299983962943122, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.95238096
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d43604ba1c1f0481c8b1d6faa1afbaa9, type: 3}
---- !u!1 &1231607334086402677 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2116299983962943132, guid: d43604ba1c1f0481c8b1d6faa1afbaa9,
-    type: 3}
-  m_PrefabInstance: {fileID: 885264946239818985}
-  m_PrefabAsset: {fileID: 0}
