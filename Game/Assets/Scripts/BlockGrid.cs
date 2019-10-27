@@ -61,7 +61,7 @@ public class BlockGrid : MonoBehaviour
     // cada bloco tem que ter seu lugar no mapa
     public Vector3 getPosInMap(int x, int y)
     {
-        Vector3 blockPos = Camera.main.ScreenToWorldPoint(new Vector3(blockSize*x + blockSize,blockSize*y + blockSize,0));
+        Vector3 blockPos = Camera.main.ScreenToWorldPoint(new Vector3(blockSize*x + 1.5f* blockSize,blockSize*y + 1.5f * blockSize,0));
 
         return blockPos;
     }
