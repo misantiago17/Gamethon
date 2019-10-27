@@ -19,6 +19,7 @@ public class ThrowBall : MonoBehaviour
         GameObject tirin = GameObject.Instantiate(tirinho, this.transform.position, this.transform.rotation);
         tirin.GetComponent<BallData>().updateNum(value);
         tirin.GetComponent<Rigidbody2D>().velocity = Force * direction;
+        gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Shoot");
     }
 
 
