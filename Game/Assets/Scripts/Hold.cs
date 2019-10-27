@@ -70,7 +70,7 @@ public class Hold : MonoBehaviour
             currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[3];
         }
         */
-        
+        //GameObject.FindGameObjectWithTag("Aura").GetComponent<SpriteRenderer>().enabled = true;
     }
 
 	private void OnMouseUp()
@@ -81,6 +81,7 @@ public class Hold : MonoBehaviour
         // pega a direcao do mouse e aplica a forca na bolinha
         Vector3 direction = (-1)*(Player.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
         Player.GetComponent<ThrowBall>().ThrowBallInDirection(direction, currentValue, currentBolinha);
+        //GameObject.FindGameObjectWithTag("Aura").GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void Update()
