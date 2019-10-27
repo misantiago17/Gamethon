@@ -100,7 +100,7 @@ public class Hold : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Current Value: " + currentValue);
+        //Debug.Log("Current Value: " + currentValue);
         
 
     }

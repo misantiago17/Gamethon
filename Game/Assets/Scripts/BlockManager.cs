@@ -103,7 +103,7 @@ public class BlockManager : MonoBehaviour
                             if (spawned[index, j] == spawned[index, j++])
                             {
                                 MergeBlocks.Instance.MergeCheck(spawned[index, j]);
-                                Debug.Log("ENTREI AA");
+                                //Debug.Log("Entrei");
                             }
                         }
                         else
@@ -113,7 +113,27 @@ public class BlockManager : MonoBehaviour
                     }
                 }
 
-                // 
+                // Verificar se tem um unico na fileira e deletá-lo
+                int count = 0;
+                for(int j=0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
+                {
+                    if (spawned[index, j] != null)
+                        count++;
+                }
+
+                if (count == 1)
+                {
+                    for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
+                    {
+                        if (spawned[index, j] != null)
+                        {
+                            spawned[index, j] = null;
+                            Destroy(spawned[index, j].gameObject);
+                        }
+                    }
+                }
+
+
 
 
             }
