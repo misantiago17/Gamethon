@@ -10,6 +10,8 @@ public class BlockManager : MonoBehaviour
     public Sprite[] Tile;
     public RuntimeAnimatorController[] animController;
 
+    public AudioSource audioPunch;
+
     //1 2 4 8 16
     [HideInInspector] public int BlockValue = 1;
 
@@ -61,6 +63,7 @@ public class BlockManager : MonoBehaviour
         //bolinhaText.text = BlockValue.ToString();
 
         bloquinhoText = this.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        audioPunch = GameObject.FindGameObjectWithTag("PunchSFX").GetComponent<AudioSource>(); 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -70,6 +73,8 @@ public class BlockManager : MonoBehaviour
             int playerNum = collision.gameObject.GetComponent<BallData>().getNum();
 
             Destroy(collision.gameObject);
+
+            audioPunch.PlayOneShot(audioPunch.clip, audioPunch.volume);
 
             if (playerNum == BlockValue) {
                 // spawn abaixo da posicao do bloco
