@@ -72,15 +72,16 @@ public class BlockGrid : MonoBehaviour
     {
         GameObject block = Instantiate(Block, new Vector3(pos.x, pos.y, 0), Block.transform.rotation, BlockParent.transform);
         block.GetComponent<BlockManager>().BlockValue = value;
-        setBloquinhoText(block, value);
+        block.GetComponent<BlockManager>().updateBlockText();
+        //setBloquinhoText(block, value);
 
         return block;
 
     }
 
-    private void setBloquinhoText(GameObject bloquinho, int value)
+   /* private void setBloquinhoText(GameObject bloquinho, int value)
     {
         TextMeshProUGUI txtBlock = bloquinho.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         txtBlock.text = value.ToString();
-    }
+    }*/
 }

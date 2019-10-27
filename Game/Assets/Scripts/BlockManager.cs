@@ -7,6 +7,10 @@ public class BlockManager : MonoBehaviour
 {
     public GameObject Player;
 
+    public Sprite[] Tile;
+    public RuntimeAnimatorController[] animController;
+
+    //1 2 4 8 16
     [HideInInspector] public int BlockValue = 1;
 
     // --------- Controle de Text e Value do bloco
@@ -16,7 +20,36 @@ public class BlockManager : MonoBehaviour
 
     public void updateBlockText()
     {
-        bloquinhoText.text = BlockValue.ToString();
+        //bloquinhoText.text = BlockValue.ToString();
+        if (BlockValue == 1) {
+            gameObject.GetComponent<SpriteRenderer>().sprite = Tile[0];
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = animController[0];
+
+        }
+        if (BlockValue == 2)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = Tile[1];
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = animController[1];
+
+        }
+        if (BlockValue == 4)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = Tile[2];
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = animController[2];
+
+        }
+        if (BlockValue == 8)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = Tile[3];
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = animController[3];
+
+        }
+        if (BlockValue == 16)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = Tile[4];
+            gameObject.GetComponent<Animator>().runtimeAnimatorController = animController[4];
+
+        }
     }
 
     // Start is called before the first frame update
@@ -39,7 +72,7 @@ public class BlockManager : MonoBehaviour
                 Player.gameObject.GetComponent<SpawnBall>().respawnBall(this.transform.position.x);
                 BlockValue *= 2;
                 updateBlockText();
-                gameObject.GetComponent<Animator>().SetTrigger("Death");
+                //gameObject.GetComponent<Animator>().SetTrigger("Death");
                 // junta os blocos
                 MergeBlocks.Instance.MergeCheck(this.gameObject);
             }

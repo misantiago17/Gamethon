@@ -380,6 +380,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 4724292863381514429, guid: 55decb608e5804dc8a5b2c9ef3ac704c, type: 3}
+  Tile:
+  - {fileID: 21300000, guid: 0fbaedc5d00050c478efa02c27161465, type: 3}
+  - {fileID: 21300000, guid: cb646db4239bdc54bb560e4b505ee108, type: 3}
+  - {fileID: 21300000, guid: 46e1b829c9e5ca84c983e32260496a7b, type: 3}
+  - {fileID: 21300000, guid: 675c5ca884dc73d449ddda313f471fc4, type: 3}
+  - {fileID: 21300000, guid: 0a2fda5a88ac3ba479964bf494480dd8, type: 3}
+  animController:
+  - {fileID: 9100000, guid: 4fb80572836eff545921916e316cafb6, type: 2}
+  - {fileID: 9100000, guid: fb1ecb58c3a3c1a42b2cda60e323f7c6, type: 2}
+  - {fileID: 9100000, guid: a0e5f3bc624d48d4eb54a43eba98732d, type: 2}
+  - {fileID: 9100000, guid: 56d0c3bb6e1c35d41a415e3effa602bc, type: 2}
+  - {fileID: 9100000, guid: 9b54526adb73d0e49815606f0211bcfb, type: 2}
   BlockValue: 1
 --- !u!95 &2132043125899450285
 Animator:
