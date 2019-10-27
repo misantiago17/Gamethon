@@ -121,7 +121,7 @@ public class MergeBlocks : MonoBehaviour
         {
             //Point Effector
             //Instantiate(PointEffect, spawned[i, j - 1].transform.position, Quaternion.identity);
-            Instantiate(PointEffect, spawned[i, j].transform.position, Quaternion.identity);
+            Instantiate(PointEffect, new Vector2(spawned[i, j + 1].transform.position.x, spawned[i, j].transform.position.y), Quaternion.identity);
 
             spawned[i, j].GetComponent<BlockManager>().BlockValue = spawned[i, j+1].GetComponent<BlockManager>().BlockValue * 2;
             spawned[i, j].GetComponent<BlockManager>().updateBlockText();
@@ -170,7 +170,8 @@ public class MergeBlocks : MonoBehaviour
         } else {
 
             //Point Effector
-            Instantiate(PointEffect, spawned[i, j].transform.position, Quaternion.identity);
+            //Instantiate(PointEffect, spawned[i, j - 1].transform.position, Quaternion.identity);
+            Instantiate(PointEffect, new Vector2(spawned[i, j + 1].transform.position.x, spawned[i, j].transform.position.y), Quaternion.identity);
 
             float auxPosXPre = spawned[i, j].transform.position.x;
             float auxPosXPos = auxPosXPre;
