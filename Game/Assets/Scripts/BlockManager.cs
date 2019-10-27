@@ -20,7 +20,6 @@ public class BlockManager : MonoBehaviour
 
     public void updateBlockText()
     {
-        //bloquinhoText.text = BlockValue.ToString();
         if (BlockValue == 1) {
             gameObject.GetComponent<SpriteRenderer>().sprite = Tile[0];
             gameObject.GetComponent<Animator>().runtimeAnimatorController = animController[0];
@@ -56,8 +55,9 @@ public class BlockManager : MonoBehaviour
     void Start()
     {
         // Pega o texto da bolinha
-        bolinhaText = this.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-        bolinhaText.text = BlockValue.ToString();
+        //bolinhaText = this.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        //bolinhaText.text = BlockValue.ToString();
+
         bloquinhoText = this.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
@@ -66,6 +66,8 @@ public class BlockManager : MonoBehaviour
         if (collision.transform.tag == "Tirinho")
         {
             int playerNum = collision.gameObject.GetComponent<BallData>().getNum();
+
+            Destroy(collision.gameObject);
 
             if (playerNum == BlockValue) {
                 // spawn abaixo da posicao do bloco
