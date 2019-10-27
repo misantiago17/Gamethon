@@ -116,7 +116,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2116299983450146564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0012474, y: -0.00025654}
+  m_AnchoredPosition: {x: -0.0012474, y: 71.2}
   m_SizeDelta: {x: 104.6, y: 103.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2116299983450146586
@@ -164,17 +164,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 1
+  m_text: 2
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 39109125e81ee4c478c8da35ffeccae0, type: 2}
+  m_sharedMaterial: {fileID: -351261122918646199, guid: 39109125e81ee4c478c8da35ffeccae0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 3573547007
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0.83137256}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -192,8 +193,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 44.16
+  m_fontSizeBase: 44.16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 1.227612, w: 0}
+  m_margin: {x: 15.099703, y: 0, z: 1.227612, w: 0}
   m_textInfo:
     textComponent: {fileID: 2116299983450146587}
     characterCount: 1
@@ -268,6 +269,7 @@ GameObject:
   - component: {fileID: 2116299983962943121}
   - component: {fileID: 2116299983962943122}
   - component: {fileID: -1753364868227113532}
+  - component: {fileID: 2132043125899450285}
   m_Layer: 0
   m_Name: Block
   m_TagString: Untagged
@@ -328,8 +330,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: db5c1997d18ec49e59e16e45c8e831d9, type: 3}
-  m_Color: {r: 0.20635898, g: 0.4339623, b: 0.12486649, a: 1}
+  m_Sprite: {fileID: 21300000, guid: cb646db4239bdc54bb560e4b505ee108, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -352,18 +354,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.023471355, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.95238096, y: 0.95238096}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.0469424, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &-1753364868227113532
 MonoBehaviour:
@@ -378,4 +380,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 4724292863381514429, guid: 55decb608e5804dc8a5b2c9ef3ac704c, type: 3}
+  Tile:
+  - {fileID: 21300000, guid: 0fbaedc5d00050c478efa02c27161465, type: 3}
+  - {fileID: 21300000, guid: cb646db4239bdc54bb560e4b505ee108, type: 3}
+  - {fileID: 21300000, guid: 46e1b829c9e5ca84c983e32260496a7b, type: 3}
+  - {fileID: 21300000, guid: 675c5ca884dc73d449ddda313f471fc4, type: 3}
+  - {fileID: 21300000, guid: 0a2fda5a88ac3ba479964bf494480dd8, type: 3}
+  animController:
+  - {fileID: 9100000, guid: 4fb80572836eff545921916e316cafb6, type: 2}
+  - {fileID: 9100000, guid: fb1ecb58c3a3c1a42b2cda60e323f7c6, type: 2}
+  - {fileID: 9100000, guid: a0e5f3bc624d48d4eb54a43eba98732d, type: 2}
+  - {fileID: 9100000, guid: 56d0c3bb6e1c35d41a415e3effa602bc, type: 2}
+  - {fileID: 9100000, guid: 9b54526adb73d0e49815606f0211bcfb, type: 2}
   BlockValue: 1
+--- !u!95 &2132043125899450285
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116299983962943132}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb1ecb58c3a3c1a42b2cda60e323f7c6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
