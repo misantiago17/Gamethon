@@ -31,6 +31,8 @@ public class Hold : MonoBehaviour
 
     private TextMeshProUGUI bolinhaText;
 
+    public Sprite[] sprites;
+
     private void Start()
     {
         bolinhaText = Bolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -45,9 +47,30 @@ public class Hold : MonoBehaviour
 
         currentValue = 1;
 
-        currentBolinha = GameObject.Instantiate(Bolinha, Player.transform.position, this.transform.rotation);
+        currentBolinha = Instantiate(Bolinha, Player.transform.position, this.transform.rotation) ;
         bolinhaText = currentBolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         // Instanci bolinha
+        /*
+        if (currentValue == 1)
+        {
+            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
+        }
+
+        if (currentValue == 2)
+        {
+            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
+        }
+
+        if (currentValue == 4)
+        {
+            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
+        }
+        if (currentValue == 8)
+        {
+            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[3];
+        }
+        */
+        currentBolinha.GetComponent<BallData>().CurrentNum = currentValue;
     }
 
 	private void OnMouseUp()
@@ -72,9 +95,13 @@ public class Hold : MonoBehaviour
                 {
                     currentValue *= 2;
                     bolinhaText.text = currentValue.ToString();
+                    
+                    
                 }
             }
         }
+        Debug.Log("Current Value: " + currentValue);
+        
 
     }
 }

@@ -22,5 +22,6 @@ public class SpawnBall : MonoBehaviour
     public void respawnBall(float blockX)
     {
         this.transform.position = new Vector3(blockX,-3,0);
+
     }
 }
