@@ -68,7 +68,7 @@ public class MergeBlocks : MonoBehaviour
                             {
                                 if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
                                 {
-                                    //Debug.Log("Primeir
+                                    //Debug.Log("Primeiro")
                                     Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
                                     currentPoints += PontoMerge;
                                     updateTextPoints();
@@ -114,7 +114,7 @@ public class MergeBlocks : MonoBehaviour
                             else if (spawned[i, j - 1] != null && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
                             {
                                 //Debug.Log("i:" + i + "j:" + j);
-                                //Debug.Log("Meio esquerda");
+                                Debug.Log("Meio esquerda");
                                 Merge(spawned[i, j], spawned[i, j - 1], null, spawned, i, j, false);
                                 currentPoints += PontoMerge;
                                 updateTextPoints();
@@ -125,7 +125,7 @@ public class MergeBlocks : MonoBehaviour
                             else if (spawned[i, j + 1] != null && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
                             {
                                 //Debug.Log("i:" + i + "j:" + j);
-                                //Debug.Log("Meio direita");
+                                Debug.Log("Meio direita");
                                 Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
                                 currentPoints += PontoMerge;
                                 updateTextPoints();
