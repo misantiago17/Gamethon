@@ -16,7 +16,7 @@ public class Hold : MonoBehaviour
     private float holdTime = 0;
 
     // O numero inicial é 4, quando ele quebra um bloco que vale mais que 4, ele passa a ser o novo máximo
-    private int MaxChargeNum = 8;
+    private int MaxChargeNum = 16;
     // A partir de certo numero quebrado ele atualiza o novo minimo do jogo
     private int MinChargeNum = 1;
 
@@ -30,6 +30,8 @@ public class Hold : MonoBehaviour
     private GameObject currentBolinha;
 
     private TextMeshProUGUI bolinhaText;
+
+    //public Sprite[] sprites;
 
     private void Start()
     {
@@ -45,9 +47,30 @@ public class Hold : MonoBehaviour
 
         currentValue = 1;
 
-        currentBolinha = GameObject.Instantiate(Bolinha, Player.transform.position, this.transform.rotation);
+        currentBolinha = Instantiate(Bolinha, Player.transform.position, this.transform.rotation) ;
         bolinhaText = currentBolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         // Instanci bolinha
+        /*
+        if (currentValue == 1)
+        {
+            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
+        }
+
+        if (currentValue == 2)
+        {
+            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
+        }
+
+        if (currentValue == 4)
+        {
+            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
+        }
+        if (currentValue == 8)
+        {
+            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[3];
+        }
+        */
+        
     }
 
 	private void OnMouseUp()
@@ -72,9 +95,13 @@ public class Hold : MonoBehaviour
                 {
                     currentValue *= 2;
                     bolinhaText.text = currentValue.ToString();
+                    currentBolinha.GetComponent<BallData>().CurrentNum = currentValue;
+
                 }
             }
         }
+        Debug.Log("Current Value: " + currentValue);
+        
 
     }
 }
