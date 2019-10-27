@@ -172,7 +172,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: e18b912fdf1b22141b115dbc56ecad66, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -1450,7 +1450,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b85d830831ecd8c47913882c20450c25, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -2638,7 +2638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf9015cabc0314c11a2372ffe8053562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnBlockTimer: 15
+  SpawnBlockTimer: 12
   FallingBlockVelocity: 0.01
   ballValue: {fileID: 1014248227}
   initLine: 0
@@ -8465,7 +8465,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: e18b912fdf1b22141b115dbc56ecad66, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
