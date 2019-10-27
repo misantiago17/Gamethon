@@ -84,9 +84,13 @@ public class BlockManager : MonoBehaviour
                     for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
                     {
                         if (spawned[i, j] == this.gameObject)
-                            index = j;
+                            index = i;
                     }
                 }
+
+                Debug.Log("Index: " + index);
+
+                Debug.Log("---------------------");
 
                 // junta os blocos
                 MergeBlocks.Instance.MergeCheck(this.gameObject);
@@ -102,8 +106,9 @@ public class BlockManager : MonoBehaviour
                         {
                             if (spawned[index, j] == spawned[index, j++])
                             {
-                                MergeBlocks.Instance.MergeCheck(spawned[index, j]);
-                                //Debug.Log("Entrei");
+                                MergeBlocks.Instance.
+                                    MergeCheck(spawned[index, j]);
+                                Debug.Log("Reverifiquei");
                             }
                         }
                         else
@@ -121,14 +126,18 @@ public class BlockManager : MonoBehaviour
                         count++;
                 }
 
+                Debug.Log("Numero de itens na linha: " + count);
+
                 if (count == 1)
                 {
                     for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
                     {
                         if (spawned[index, j] != null)
                         {
-                            spawned[index, j] = null;
+                            Debug.Log("Apaguei linha sozinha");
                             Destroy(spawned[index, j].gameObject);
+                            spawned[index, j] = null;
+                            RandomizeBlocks.Instance.initLine++;
                         }
                     }
                 }

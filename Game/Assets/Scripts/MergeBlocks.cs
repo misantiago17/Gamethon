@@ -30,11 +30,12 @@ public class MergeBlocks : MonoBehaviour
     // Verifica se há merges para serem feitos, fazer isso enquanto ?
     public bool MergeCheck(GameObject bloquinho)
     {
-        //int lineInitial = RandomizeBlocks.Instance.initLine;
+        int lineInitial = RandomizeBlocks.Instance.initLine;
+        Debug.Log("linha inicial: " + lineInitial);
 
         GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
 
-        for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+        for (int i = lineInitial; i < lineInitial + BlockGrid.Instance.numHorizontalBlocks - 2; i++)
         {
             for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
             {
@@ -48,6 +49,7 @@ public class MergeBlocks : MonoBehaviour
 
                             if (spawned[i, j + 1] != null)
                             {
+                                Debug.Log("i:" + i + "j:" + j);
                                 if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
                                 {
                                     Debug.Log("Primeiro");
@@ -61,6 +63,7 @@ public class MergeBlocks : MonoBehaviour
                         {
                             if (spawned[i, j - 1] != null)
                             {
+                                Debug.Log("i:" + i + "j:" + j);
                                 if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
                                 {
                                     Debug.Log("Ultimo");
@@ -73,21 +76,23 @@ public class MergeBlocks : MonoBehaviour
                         else
                         {
 
-                            if (spawned[i, j - 1] != null && spawned[i, j + 1] != null)
+                            
+                            if (spawned[i, j - 1] != null && spawned[i, j + 1] != null &&
+                                spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue
+                            && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
                             {
-                                if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue
-                                && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
-                                {
-                                    Debug.Log("Caso de tres");
-                                    Merge(spawned[i, j], spawned[i, j - 1], spawned[i, j + 1], spawned, i, j, false);
-                                    return true;
-                                }
+                                Debug.Log("i:" + i + "j:" + j);
+                                Debug.Log("Caso de tres");
+                                Merge(spawned[i, j], spawned[i, j - 1], spawned[i, j + 1], spawned, i, j, false);
+                                return true;
                             }
+                            
 
                             // dir
                             else if (spawned[i, j - 1] != null && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
                             {
-                                Debug.Log("Meio direita");
+                                Debug.Log("i:" + i + "j:" + j);
+                                Debug.Log("Meio esquerda");
                                 Merge(spawned[i, j], spawned[i, j - 1], null, spawned, i, j, false);
                                 return true;
                             }
@@ -95,7 +100,8 @@ public class MergeBlocks : MonoBehaviour
                             // esq
                             else if (spawned[i, j + 1] != null && spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
                             {
-                                Debug.Log("Meio esquerda");
+                                Debug.Log("i:" + i + "j:" + j);
+                                Debug.Log("Meio direita");
                                 Merge(spawned[i, j], spawned[i, j + 1], null, spawned, i, j, true);
                                 return true;
                             }
@@ -121,7 +127,8 @@ public class MergeBlocks : MonoBehaviour
         {
             //Point Effector
             //Instantiate(PointEffect, spawned[i, j - 1].transform.position, Quaternion.identity);
-            Instantiate(PointEffect, new Vector2(spawned[i, j + 1].transform.position.x, spawned[i, j].transform.position.y), Quaternion.identity);
+            if(PointEffect != null)
+                Instantiate(PointEffect, new Vector2(spawned[i, j /*+ 1*/].transform.position.x, spawned[i, j].transform.position.y), Quaternion.identity);
 
             spawned[i, j].GetComponent<BlockManager>().BlockValue = spawned[i, j+1].GetComponent<BlockManager>().BlockValue * 2;
             spawned[i, j].GetComponent<BlockManager>().updateBlockText();
@@ -171,7 +178,8 @@ public class MergeBlocks : MonoBehaviour
 
             //Point Effector
             //Instantiate(PointEffect, spawned[i, j - 1].transform.position, Quaternion.identity);
-            Instantiate(PointEffect, new Vector2(spawned[i, j + 1].transform.position.x, spawned[i, j].transform.position.y), Quaternion.identity);
+            if(PointEffect != null)
+                Instantiate(PointEffect, new Vector2(spawned[i, j /*+ 1*/].transform.position.x, spawned[i, j].transform.position.y), Quaternion.identity);
 
             float auxPosXPre = spawned[i, j].transform.position.x;
             float auxPosXPos = auxPosXPre;
