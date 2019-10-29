@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BallData : MonoBehaviour
 {
-    [HideInInspector] public int CurrentNum = 1;
+    /*[HideInInspector] public int CurrentNum = 1;
     public Sprite[] sprites;
     public Color[] auraColors;
 
@@ -12,7 +12,7 @@ public class BallData : MonoBehaviour
     {
         CurrentNum = num;
 
-        
+       
     }
     public void Update()
     {
@@ -48,5 +48,5 @@ public class BallData : MonoBehaviour
     public int getNum()
     {
         return CurrentNum;
-    }
+    }*/
 }
