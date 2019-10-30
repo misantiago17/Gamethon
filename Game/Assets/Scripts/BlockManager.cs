@@ -5,22 +5,22 @@ using TMPro;
 
 public class BlockManager : MonoBehaviour
 {
-    public GameObject Player;
+    //public GameObject Player;
 
-    public Sprite[] Tile;
-    public RuntimeAnimatorController[] animController;
+    //public Sprite[] Tile;
+    //public RuntimeAnimatorController[] animController;
 
-    public AudioSource audioPunch;
+    //public AudioSource audioPunch;
 
     //1 2 4 8 16
-    [HideInInspector] public int BlockValue = 1;
+    //[HideInInspector] public int BlockValue = 1;
 
     // --------- Controle de Text e Value do bloco
 
-    private TextMeshProUGUI bolinhaText;
-    private TextMeshProUGUI bloquinhoText;
+   // private TextMeshProUGUI bolinhaText;
+    //private TextMeshProUGUI bloquinhoText;
 
-    public void updateBlockText()
+    /*public void updateBlockText()
     {
         if (BlockValue == 1) {
             gameObject.GetComponent<SpriteRenderer>().sprite = Tile[0];
@@ -53,7 +53,7 @@ public class BlockManager : MonoBehaviour
             StartCoroutine(showAndDie());
 
         }
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
@@ -63,24 +63,24 @@ public class BlockManager : MonoBehaviour
         //bolinhaText.text = BlockValue.ToString();
 
         //bloquinhoText = this.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-        audioPunch = GameObject.FindGameObjectWithTag("PunchSFX").GetComponent<AudioSource>(); 
+        //audioPunch = GameObject.FindGameObjectWithTag("PunchSFX").GetComponent<AudioSource>(); 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Tirinho")
         {
-            int playerNum = collision.gameObject.GetComponent<BallData>().getNum();
+            //int playerNum = collision.gameObject.GetComponent<BallData>().getNum();
 
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
 
             //audioPunch.PlayOneShot(audioPunch.clip, audioPunch.volume);
 
             if (playerNum == BlockValue) {
                 // spawn abaixo da posicao do bloco
                 Player.gameObject.GetComponent<SpawnBall>().respawnBall(this.transform.position.x);
-                BlockValue *= 2;
-                updateBlockText();
+                //BlockValue *= 2;
+                //updateBlockText();
                 //gameObject.GetComponent<Animator>().SetTrigger("Death");
 
                 GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
@@ -100,7 +100,7 @@ public class BlockManager : MonoBehaviour
                 Debug.Log("---------------------");
 
                 // junta os blocos
-                MergeBlocks.Instance.MergeCheck(this.gameObject);
+                //MergeBlocks.Instance.MergeCheck(this.gameObject);
 
                 bool acabouRepticoes = false;
 
@@ -156,7 +156,7 @@ public class BlockManager : MonoBehaviour
         }
     }
 
-    IEnumerator showAndDie()
+    /*IEnumerator showAndDie()
     {
         bool wait = true;
 
@@ -181,5 +181,5 @@ public class BlockManager : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 }

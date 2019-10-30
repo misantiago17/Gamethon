@@ -7,8 +7,7 @@ public class BlocoInstance : MonoBehaviour {
 
     public int MaxBlockValue = 16;
 
-    [Tooltip("Tempo de espera para que um bloco sozinho na fileira ou de valor 16 se auto destrua")]
-    public float AutodestructTime = 1.5f;
+    [Tooltip("Animação para que um bloco sozinho na fileira ou de valor 16 se auto destrua")]
     public Animation AutoDestructAnimation; 
 
     [Space (5)]
@@ -90,8 +89,24 @@ public class BlocoInstance : MonoBehaviour {
 
     }
 
+    /// ------- Funções de posicao e localizacao do bloco ----------
 
-    // ------- Funções de colisão e merge do bloco ----------
+    // toda vez que um novo block é criado essa função será chamada
+    public void SetBlockData(int value, int lineID, int lineIndex) {
+        blockData.setValue(value);
+        blockData.setBlockLineID(lineID);
+        blockData.setBlockIndexInLine(lineIndex);
+    }
+
+    public int getBlockLineID() {
+        return blockData.getBlockLineID();
+    }
+
+    public int getBlockLineIndex() {
+        return blockData.getBlockIndexInLine();
+    }
+
+    /// ------- Funções de colisão e merge do bloco ----------
 
     private void OnCollisionEnter2D(Collision2D collision) {
 
@@ -156,16 +171,16 @@ public class BlocoInstance : MonoBehaviour {
         if (AutoDestructAnimation) {
             yield return WaitForAnimation(AutoDestructAnimation);
         } else {
-            yield return new WaitForSeconds(AutodestructTime);
+            yield return new WaitForSeconds(1.5f);
         }
         
         // retira o objeto da grid ---- !
 
-        // Trigga a animação e retira do jogo
-        // trig animation
+        // Retira do jogo
         Destroy(this.gameObject);
 
         // Faz o merge das colunas ao lado se ainda houver vizinhos 
+        MergeBlocks.Instance.MergeCheck(this.gameObject);
 
     }
 

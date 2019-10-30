@@ -13,8 +13,8 @@ public class BlockGrid : MonoBehaviour
     // deixa um espaco de 1 block na parte de baixo da tela
     // monta o restante com isso
 
-    public GameObject Block;
-    public GameObject BlockParent;
+    //public GameObject Block;
+    //public GameObject BlockParent;
 
     public int numHorizontalBlocks = 7;
 
@@ -40,7 +40,7 @@ public class BlockGrid : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         height = Screen.height;
         width = Screen.width;
@@ -64,7 +64,7 @@ public class BlockGrid : MonoBehaviour
         Vector3 blockPos = Camera.main.ScreenToWorldPoint(new Vector3(blockSize*x + 1.5f* blockSize,blockSize*y + 1.5f * blockSize,0));
 
         return blockPos;
-    }
+    }*/
 
 
 
