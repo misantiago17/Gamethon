@@ -67,8 +67,8 @@ public class BlockGrid : MonoBehaviour
     }*/
 
 
-
-    public GameObject createBlock(Vector3 pos, int value)
+    // NAO MEXI
+    /*public GameObject createBlock(Vector3 pos, int value)
     {
         GameObject block = Instantiate(Block, new Vector3(pos.x, pos.y, 0), Block.transform.rotation, BlockParent.transform);
         block.GetComponent<BlockManager>().BlockValue = value;
@@ -77,7 +77,7 @@ public class BlockGrid : MonoBehaviour
 
         return block;
 
-    }
+    }*/
 
    /* private void setBloquinhoText(GameObject bloquinho, int value)
     {

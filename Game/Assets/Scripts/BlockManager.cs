@@ -76,9 +76,9 @@ public class BlockManager : MonoBehaviour
 
             //audioPunch.PlayOneShot(audioPunch.clip, audioPunch.volume);
 
-            if (playerNum == BlockValue) {
+            if (/*playerNum == BlockValue*/ false) {
                 // spawn abaixo da posicao do bloco
-                Player.gameObject.GetComponent<SpawnBall>().respawnBall(this.transform.position.x);
+                //Player.gameObject.GetComponent<SpawnBall>().respawnBall(this.transform.position.x);
                 //BlockValue *= 2;
                 //updateBlockText();
                 //gameObject.GetComponent<Animator>().SetTrigger("Death");

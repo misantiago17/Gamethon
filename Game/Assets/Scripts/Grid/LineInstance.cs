@@ -56,11 +56,11 @@ public class LineInstance : MonoBehaviour
     private void createBlocks() {
 
         // To Do
-
-        GameObject line = Instantiate(LinePrefab, lineInitialPos, LinePrefab.transform.rotation, this.transform);
+        // Fazer isso instanciando bloquinhos
+        /*GameObject line = Instantiate(LinePrefab, lineInitialPos, LinePrefab.transform.rotation, this.transform);
         int blocksCount = line.GetComponent<LineInstance>().getNumOfBlocks();
         line.GetComponent<LineInstance>().SetLineData(lastLineID, blocksCount);
-        lineList.Add(line);
+        lineList.Add(line);*/
 
     }
 

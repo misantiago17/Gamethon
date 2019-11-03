@@ -96,7 +96,8 @@ public class Hold : MonoBehaviour
                 {
                     currentValue *= 2;
                     bolinhaText.text = currentValue.ToString();
-                    currentBolinha.GetComponent<BallData>().CurrentNum = currentValue;
+                    // REFAZER
+                    //currentBolinha.GetComponent<BallData>().CurrentNum = currentValue;
 
                 }
             }

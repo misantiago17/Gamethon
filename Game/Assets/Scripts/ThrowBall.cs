@@ -13,9 +13,10 @@ public class ThrowBall : MonoBehaviour
         this.GetComponent<Rigidbody2D>().gravityScale = 0;
     }
 
+    // NAO MEXI
     public void ThrowBallInDirection(Vector3 direction, int value, GameObject ball)
     {
-        ball.GetComponent<BallData>().updateNum(value);
+        //ball.GetComponent<BallData>().updateNum(value);
         ball.GetComponent<Rigidbody2D>().velocity = Force * direction;
         gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Shoot");
         gameObject.GetComponentInChildren<ParticleSystem>().Play();

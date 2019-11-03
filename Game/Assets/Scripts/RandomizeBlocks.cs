@@ -165,7 +165,8 @@ public class RandomizeBlocks : MonoBehaviour
 
             if (blockPres[i] != 0)
             {
-                SpawnedBlocks[numLines, i] = BlockGrid.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], blockPres[i]);
+                // NAO MEXI
+                //SpawnedBlocks[numLines, i] = BlockGrid.Instance.createBlock(BlockGrid.Instance.gridWorld[i, BlockGrid.Instance.numHorizontalBlocks], blockPres[i]);
             }
         }
 
