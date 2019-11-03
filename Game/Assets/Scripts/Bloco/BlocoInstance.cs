@@ -22,8 +22,10 @@ public class BlocoInstance : MonoBehaviour {
     /// ------- Funções de básicas ----------
 
     private void Start() {
-        audioPunch = GameObject.FindGameObjectWithTag("PunchSFX").GetComponent<AudioSource>();
-        blockData.setMaxPosibleValue(MaxBlockValue);
+        if (GameObject.FindGameObjectWithTag("PunchSFX"))
+            audioPunch = GameObject.FindGameObjectWithTag("PunchSFX").GetComponent<AudioSource>();
+
+        Debug.Log("Criei bloquinho");
     }
 
     /// ------- Funções de controle de valor do bloco ----------
@@ -93,6 +95,11 @@ public class BlocoInstance : MonoBehaviour {
 
     // toda vez que um novo block é criado essa função será chamada
     public void SetBlockData(int value, int lineID, int lineIndex) {
+
+        if(blockData == null) 
+            blockData = new Bloco();
+
+        blockData.setMaxPosibleValue(MaxBlockValue);
         blockData.setValue(value);
         blockData.setBlockLineID(lineID);
         blockData.setBlockIndexInLine(lineIndex);

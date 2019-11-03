@@ -18,6 +18,8 @@ public class BulletInstance : MonoBehaviour {
     /// ------- Funções de básicas ----------
 
     private void Start() {
+
+        bulletData = new Bullet();
         bulletData.setMaxPosibleValue(MaxBulletValue);
     }
 

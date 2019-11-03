@@ -29,13 +29,9 @@ public class Hold : MonoBehaviour
 
     private GameObject currentBolinha;
 
-    private TextMeshProUGUI bolinhaText;
-
-    //public Sprite[] sprites;
 
     private void Start()
     {
-        bolinhaText = Bolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
 
         // freeze a rotacao da bolinha para fazer o trail
         Bolinha.GetComponent<Rigidbody2D>().freezeRotation = true;
@@ -46,31 +42,7 @@ public class Hold : MonoBehaviour
         holding = true;
 
         currentValue = 1;
-
         currentBolinha = Instantiate(Bolinha, Player.transform.position, this.transform.rotation) ;
-        bolinhaText = currentBolinha.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
-        // Instanci bolinha
-        /*
-        if (currentValue == 1)
-        {
-            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[0];
-        }
-
-        if (currentValue == 2)
-        {
-            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[1];
-        }
-
-        if (currentValue == 4)
-        {
-            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[2];
-        }
-        if (currentValue == 8)
-        {
-            currentBolinha.gameObject.GetComponent<SpriteRenderer>().sprite = sprites[3];
-        }
-        */
-        //GameObject.FindGameObjectWithTag("Aura").GetComponent<SpriteRenderer>().enabled = true;
     }
 
 	private void OnMouseUp()
@@ -80,7 +52,7 @@ public class Hold : MonoBehaviour
 
         // pega a direcao do mouse e aplica a forca na bolinha
         Vector3 direction = (-1)*(Player.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
-        Player.GetComponent<ThrowBall>().ThrowBallInDirection(direction, currentValue, currentBolinha);
+        currentBolinha.GetComponent<BulletThrow>().ThrowBallInDirection(direction);
         //GameObject.FindGameObjectWithTag("Aura").GetComponent<SpriteRenderer>().enabled = false;
     }
 
@@ -95,15 +67,10 @@ public class Hold : MonoBehaviour
                 if (currentValue < MaxChargeNum)
                 {
                     currentValue *= 2;
-                    bolinhaText.text = currentValue.ToString();
-                    // REFAZER
-                    //currentBolinha.GetComponent<BallData>().CurrentNum = currentValue;
-
+                    currentBolinha.GetComponent<BulletInstance>().UpdateBulletValue(currentValue);
                 }
             }
-        }
-        //Debug.Log("Current Value: " + currentValue);
-        
+        }        
 
     }
 }

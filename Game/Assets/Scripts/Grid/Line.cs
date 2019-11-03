@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Line : MonoBehaviour
-{
+public class Line {
     private int ID;
 
     private int numberOfBlocks = 0;

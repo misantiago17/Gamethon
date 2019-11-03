@@ -17,21 +17,35 @@ public class GridManager : MonoBehaviour
 
     private int lastLineID = 0;
 
-    private LineInstance lineData;
-    private Vector3 lineInitialPos;
-
     private void Start() {
-        lineInitialPos = LinePrefab.GetComponent<LineInstance>().SpawnLinePosition();
         StartCoroutine(SpawnBlockLine());
     }
 
-    /// ------- Funções de criação da grid ----------
+    /// ------- Funções de controle da lista de lines ----------
      
+    public void RemoveBlockFromLine(GameObject block) {
+
+        for(int i=0; i<lineList.Count; i++) {
+
+            bool removed = lineList[i].GetComponent<LineInstance>().RemoveBlockFromLine(block);
+            if (removed) {
+                if (lineList[i].GetComponent<LineInstance>().getNumOfBlocks() == 0) {
+                    Destroy(lineList[i]);
+                    lineList.RemoveAt(i);
+                }
+            }
+        }
+    }
+
+    /// ------- Funções de criação da grid ----------
+
     private void createLine() {
 
-        GameObject line = Instantiate(LinePrefab, lineInitialPos, LinePrefab.transform.rotation, this.transform);
+        GameObject line = Instantiate(LinePrefab, this.transform.position, LinePrefab.transform.rotation, this.transform);
         int blocksCount = line.GetComponent<LineInstance>().getNumOfBlocks();
         line.GetComponent<LineInstance>().SetLineData(lastLineID, blocksCount);
+
+        lastLineID++;
         lineList.Add(line);
     }
 
