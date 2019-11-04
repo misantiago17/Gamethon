@@ -8,6 +8,9 @@ public class GridManager : MonoBehaviour
     // fazer a rotação das linhas que estão sendo criadas e excluídas
     // Ela vai ficar no gameobject raíz Grid
 
+    private static GridManager _instance;
+    public static GridManager Instance { get { return _instance; } }
+
     public float SpawnBlockTimer = 7;
 
     public GameObject LinePrefab;
@@ -16,6 +19,14 @@ public class GridManager : MonoBehaviour
     private List<GameObject> lineList = new List<GameObject>();
 
     private int lastLineID = 0;
+
+    private void Awake() {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
+    }
 
     private void Start() {
         StartCoroutine(SpawnBlockLine());

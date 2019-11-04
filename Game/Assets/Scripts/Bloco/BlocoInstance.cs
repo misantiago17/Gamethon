@@ -24,8 +24,6 @@ public class BlocoInstance : MonoBehaviour {
     private void Start() {
         if (GameObject.FindGameObjectWithTag("PunchSFX"))
             audioPunch = GameObject.FindGameObjectWithTag("PunchSFX").GetComponent<AudioSource>();
-
-        Debug.Log("Criei bloquinho");
     }
 
     /// ------- Funções de controle de valor do bloco ----------
@@ -76,7 +74,7 @@ public class BlocoInstance : MonoBehaviour {
             case 16:
                 spriteRend.sprite = TileSprite[4];
                 animator.runtimeAnimatorController = AnimationController[4];
-                // se auto explode -------!
+                AutodestructBlock();
                 break;
 
             // ideal é ter um bloco com uma imagem propositalmente errada (tipo um ! ou X)  ----- !
@@ -138,7 +136,7 @@ public class BlocoInstance : MonoBehaviour {
                     updateBlockValue(newValue);
 
                     // Faz o merge ------------------------ !
-                    MergeBlocks.Instance.MergeCheck(this.gameObject);
+                    //MergeBlocks.Instance.MergeCheck(this.gameObject);
 
                     // BIG HUGE OBS: ----------------------------------------------------------------!
                     // o outro código estava tentando repetir as iterações do merge por aqui (coisa nada saudavel)
@@ -180,14 +178,14 @@ public class BlocoInstance : MonoBehaviour {
         } else {
             yield return new WaitForSeconds(1.5f);
         }
-        
-        // retira o objeto da grid ---- !
 
+        // retira da grid
+        GridManager.Instance.RemoveBlockFromLine(this.gameObject);
         // Retira do jogo
         Destroy(this.gameObject);
 
         // Faz o merge das colunas ao lado se ainda houver vizinhos 
-        MergeBlocks.Instance.MergeCheck(this.gameObject);
+        //MergeBlocks.Instance.MergeCheck(this.gameObject);
 
     }
 

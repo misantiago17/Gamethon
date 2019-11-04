@@ -6,13 +6,12 @@ using UnityEngine.UI;
 public class BlockKiller : MonoBehaviour
 {
     public GameObject LosePanel;
-    public GameObject Grid;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("Block"))
         {
-            Grid.GetComponent<GridManager>().RemoveBlockFromLine(collision.gameObject);
+            GridManager.Instance.RemoveBlockFromLine(collision.gameObject);
             Destroy(collision.gameObject);
         }
     }

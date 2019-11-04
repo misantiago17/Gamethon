@@ -11,7 +11,6 @@ public class LineInstance : MonoBehaviour
     // reorganiza os blocos dentro da lista (parte do merge)
     // esse objeto vai fazer parte do gameobject de lista
 
-    public GameObject GridPrefab;
     public GameObject BlockPrefab;
     public int MaxNumOfBlocksPerLine = 7;
     public float SpawnOffsetFromTop = 1.5f;
@@ -135,6 +134,8 @@ public class LineInstance : MonoBehaviour
         for (int i = 0; i < MaxNumOfBlocksPerLine; i++) {
             blocksPattern.Add(1);
         }
+
+        currentNumOfblocks = MaxNumOfBlocksPerLine;
 
     }
 

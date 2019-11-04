@@ -19,7 +19,9 @@ public class BulletInstance : MonoBehaviour {
 
     private void Start() {
 
-        bulletData = new Bullet();
+        if (bulletData == null)
+            bulletData = new Bullet();
+
         bulletData.setMaxPosibleValue(MaxBulletValue);
     }
 
@@ -30,6 +32,10 @@ public class BulletInstance : MonoBehaviour {
     }
 
     public void UpdateBulletValue(int value) {
+
+        if (bulletData == null)
+            bulletData = new Bullet();
+
         bulletData.setValue(value);
         updateBulletSkin();
     }
@@ -80,7 +86,7 @@ public class BulletInstance : MonoBehaviour {
                 break;
 
             // ideal é ter um tiro com uma imagem propositalmente errada (tipo um ! ou X)  ----- !
-            // por enquanto é amarelo
+            // por enquanto é verde
             default:
                 Debug.LogError("Valor do tiro errado");
                 spriteRend.sprite = BulletSprite[0];
