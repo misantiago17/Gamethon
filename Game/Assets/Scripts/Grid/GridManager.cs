@@ -85,12 +85,22 @@ public class GridManager : MonoBehaviour
 
     /// ------- Funções de merge ----------
 
+        // Esse merge check tem que estar no LineInstance 
+
     // Verifica se tem merges a serem feitos
     // faz isso até que todos os merges da linha foram completados
     public void MergeCheck(int lineID, GameObject block) {
 
         Debug.Log("avaliando o merge");
+        bool temMerge = false; 
+
         // Pega a linha do bloco acertado
+        GameObject line = getLinefromId(lineID);
+        //List<GameObject> blocksInLine = line.GetComponent<LineInstance>().
+
+        // Caso 1: Bloco entre blocos
+        // Aumenta o valor dele, apaga os dois do lado, puxa todos os vizinhos ao lado um a direita.
+        //if (line)
 
         // Verifica no bloco qual caso que foi feito - precisa receber o bloco? se ele só reolhar a linha várias vezes não serve?
         // recebendo a linha ele avalia se tem dois blocos iguais e vê em qual caso ele entra  (caso o block seja null - cuidado com o caso 3)
