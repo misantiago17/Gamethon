@@ -74,6 +74,10 @@ public class LineInstance: MonoBehaviour
         }
     }
 
+    public void UpdateBlockPatternValue(int value, int index) {
+        blocksPattern[index] = value;
+    }
+
     /// ------- Funções de posicionamento dos blocos dentro da linha ---------- 
 
     // Pega o numero de blocos que vão estar presentes na linha e divide o valor de x entre esses blocos
@@ -227,6 +231,69 @@ public class LineInstance: MonoBehaviour
         }
 
     }
+
+    /// ------- Funções de merge ----------
+    /// 
+
+    // Verifica se tem merges a serem feitos
+    // faz isso até que todos os merges da linha foram completados
+    public void MergeCheck(int blockIndex) {
+
+        Debug.Log("avaliando o merge");
+
+        BlocoInstance blockInfo = blockList[blockIndex].GetComponent<BlocoInstance>();
+
+        // Caso não tenha um merge ele para a função recursiva
+        bool temMerge = false;
+
+        // Caso 4: Bloco chegou no ultimo valor
+        // Puxa todos os blocos à esquerda 1 à direita
+        if (blocksPattern[blockIndex] == blockInfo.MaxBlockValue) {
+
+            Merge(blockIndex, true);
+
+        } else {
+
+            //Caso 1: Se for o entre tres blocos, aumenta o valor dele, apaga os dois ao lado, e se houverem vizinhos de qualquer um dos lados, eles assumem a posicao dos vizinhos
+
+            //Caso 2: Se tiver um vizinho a direita igual, aumenta o valor do vizinho a direita, apaga o da esquerda e se houverem viznhos a esquerda puxa todos eles para um a direita
+
+            //Caso 3: Se tiver um vizinho a esquerda igual, aumenta o valor do vizinho a esquerda, apaga o da direita e se houverem viznhos a direita puxa todos eles para um a esquerda
+
+        }
+
+
+
+
+        // Caso 1: Bloco entre blocos
+        // Aumenta o valor dele, apaga os dois do lado, puxa todos os vizinhos ao lado um a direita.
+        //if (line)
+
+        // Verifica no bloco qual caso que foi feito - precisa receber o bloco? se ele só reolhar a linha várias vezes não serve?
+        // recebendo a linha ele avalia se tem dois blocos iguais e vê em qual caso ele entra  (caso o block seja null - cuidado com o caso 3)
+        // no caso três olhar sempre dois a frente
+
+
+
+
+        // Ao final avalia se existe bloco sozinho na lista e apaga ele - soma pontos
+        // Refaz o código se ainda for visto que está dentro de um desses casos ( talvez usar uma bool que se torna true se entra em um dos casos e se for true ele chama de novo o código)
+
+
+    }
+
+    // Faz o merge lentamente amem
+    private void Merge(int blocoIndex, bool pullRight) {
+
+        // Todos os blocos a esquerda andam 1 a direita e substituiem a posicao do indice em diante
+        if (pullRight) {
+            // Chama a corotina para fazer esse merge
+        } else {
+
+        }
+
+    }
+
 
     /// ------- Funções de fazer a linha cair ---------- 
 

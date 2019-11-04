@@ -34,6 +34,10 @@ public class BlocoInstance : MonoBehaviour {
 
     private void updateBlockValue(int value) {
         blockData.setValue(value);
+
+        GameObject line = this.transform.parent.gameObject;
+        line.GetComponent<LineInstance>().UpdateBlockPatternValue(value,blockData.getBlockIndexInLine());
+
         updateBlockSkin();
     }
 
@@ -138,7 +142,8 @@ public class BlocoInstance : MonoBehaviour {
                     updateBlockValue(newValue);
 
                     // Faz o merge 
-                    GridManager.Instance.MergeCheck(getBlockLineID(), this.gameObject);
+                    GameObject line = this.transform.parent.gameObject;
+                    line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());
 
                     // BIG HUGE OBS: ----------------------------------------------------------------!
                     // o outro código estava tentando repetir as iterações do merge por aqui (coisa nada saudavel)
