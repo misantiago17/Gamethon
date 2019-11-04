@@ -7,8 +7,8 @@ public class RandomizeBlocks : MonoBehaviour
     // Randomiza os blocos que aparecem na primeira linha da grid
     // faz os blocos cairem
 
-    public float SpawnBlockTimer = 5;
-    public float FallingBlockVelocity = 0.5f;
+    //public float SpawnBlockTimer = 5;
+    //public float FallingBlockVelocity = 0.5f;
 
     public Hold ballValue;
 
@@ -20,11 +20,11 @@ public class RandomizeBlocks : MonoBehaviour
 
     [HideInInspector] public int initLine = 0;
 
-    private static RandomizeBlocks _instance;
+    //private static RandomizeBlocks _instance;
 
-    public static RandomizeBlocks Instance { get { return _instance; } }
+    //public static RandomizeBlocks Instance { get { return _instance; } }
 
-    private void Awake()
+    /*private void Awake()
     {
         if (_instance != null && _instance != this)
         {
@@ -34,25 +34,25 @@ public class RandomizeBlocks : MonoBehaviour
         {
             _instance = this;
         }
-    }
+    }*/
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnBlockLine();
-        StartCoroutine(makeLinesFall());
+        //spawnBlockLine();
+        //StartCoroutine(makeLinesFall());
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        /*timer += Time.deltaTime;
 
         if (timer >= SpawnBlockTimer)
         {
             spawnBlockLine();
             timer = 0;
-        }
+        }*/
 
     }
 
@@ -61,8 +61,8 @@ public class RandomizeBlocks : MonoBehaviour
     void spawnBlockLine()
     {
         // indica a presenca do bloco nos quadrantes
-        int[] blockPres = new int[BlockGrid.Instance.numHorizontalBlocks - 1];
-        for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+        //int[] blockPres = new int[BlockGrid.Instance.numHorizontalBlocks - 1];
+        /*for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++)
             blockPres[i] = Random.Range(0, 2);
 
         // verifica se nao tem nenhum sozinho
@@ -85,9 +85,9 @@ public class RandomizeBlocks : MonoBehaviour
                         blockPres[i + 1] = 1;
                 }
             }
-        }
+        }*/
 
-        int[] myValues = new int[4];
+        /*int[] myValues = new int[4];
 
         myValues[0] = 1;
         myValues[1] = 2;
@@ -158,10 +158,10 @@ public class RandomizeBlocks : MonoBehaviour
                 }
             }
 
-        }
+        }*/
 
 
-        for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++) {
+        /*for (int i = 0; i < BlockGrid.Instance.numHorizontalBlocks - 2; i++) {
 
             if (blockPres[i] != 0)
             {
@@ -173,12 +173,12 @@ public class RandomizeBlocks : MonoBehaviour
         if (numLines == 30)
             numLines = 0;
         else
-            numLines++;
+            numLines++;*/
     }
 
 
     // Deixar isso smooth
-    IEnumerator makeLinesFall()
+    /*IEnumerator makeLinesFall()
     {
         while (true)
         {
@@ -195,6 +195,6 @@ public class RandomizeBlocks : MonoBehaviour
 
             yield return new WaitForSeconds(0.02f);
         }
-    }
+    }*/
     
 }

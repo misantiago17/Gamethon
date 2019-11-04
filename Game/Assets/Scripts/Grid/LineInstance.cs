@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineInstance : MonoBehaviour
+public class LineInstance: MonoBehaviour
 {
     // Essa classe vai fazer o management dos blocos dentro da lista e a lista em si
     // retira da lista
@@ -54,7 +54,7 @@ public class LineInstance : MonoBehaviour
         int height = Screen.height;
         int width = Screen.width;
 
-        Vector3 LinePos = Camera.main.ScreenToWorldPoint(new Vector3(0, (float)height, 0));
+        Vector3 LinePos = Camera.main.ScreenToWorldPoint(new Vector3(0, (float) height, 0));
         Vector3 pos = new Vector3(0, LinePos.y - SpawnOffsetFromTop, 0);
 
         return pos;
@@ -62,18 +62,16 @@ public class LineInstance : MonoBehaviour
 
     /// ------- Funções de controle da lista de blocos ----------
 
-    public bool RemoveBlockFromLine(GameObject block) {
+    public void RemoveBlockFromLine(GameObject block) {
 
-        for (int i = 0; i < blockList.Count; i++) {
-            if (blockList[i] == block) {
-                blockList.RemoveAt(i);
-                int num = lineData.getNumOfBlocks() - 1;
-                lineData.setNumOfBlocks(num);
-                return true;
-            }
+        int index = block.GetComponent<BlocoInstance>().getBlockLineIndex();
+
+        if (blockList[index] == block) {
+            blockList.RemoveAt(index);
+            blocksPattern[index] = 0;
+            int num = lineData.getNumOfBlocks() - 1;
+            lineData.setNumOfBlocks(num);
         }
-
-        return false;
     }
 
     /// ------- Funções de posicionamento dos blocos dentro da linha ---------- 
@@ -86,8 +84,8 @@ public class LineInstance : MonoBehaviour
 
         // Gera todos os blocos a partir do centro
         // Diminui deles uma quantidade fixa relativa a quantidade de blocos na linha
-        for (int i=0; i < MaxNumOfBlocksPerLine; i++) {
-            blocksXPosition.Add(i*size + shiftBack);
+        for (int i = 0; i < MaxNumOfBlocksPerLine; i++) {
+            blocksXPosition.Add(i * size + shiftBack);
         }
 
     }
@@ -100,9 +98,9 @@ public class LineInstance : MonoBehaviour
 
         createPattern();
 
-        for (int i=0; i < MaxNumOfBlocksPerLine; i++) {
+        for (int i = 0; i < MaxNumOfBlocksPerLine; i++) {
 
-            if(blocksPattern[i] != 0) {
+            if (blocksPattern[i] != 0) {
 
                 // set block x position in line
                 Vector3 blockPosition = new Vector3(blocksXPosition[i], 0, 0);
@@ -121,7 +119,6 @@ public class LineInstance : MonoBehaviour
 
     /// ------- Funções de criação dos padrões dos blocos na linha ---------- 
 
-
     private void createPattern() {
 
         randomizePattern();
@@ -131,18 +128,103 @@ public class LineInstance : MonoBehaviour
     // randomiza a presença dos blocos na linha sem que haja um bloco sozinho
     private void randomizePattern() {
 
+        // Randomiza onde terá bloco ou não
         for (int i = 0; i < MaxNumOfBlocksPerLine; i++) {
-            blocksPattern.Add(1);
+            int exists = Random.Range(0, 2);
+            blocksPattern.Add(exists);
+
+            if (exists == 1) currentNumOfblocks++;
         }
 
-        currentNumOfblocks = MaxNumOfBlocksPerLine;
+        // verifica se nao tem nenhum sozinho
+        // Por definição, adiciona se encontra nas pontas e retira se encontra sozinho no meio
+        for (int i = 0; i < MaxNumOfBlocksPerLine; i++) {
+
+            // Primeiro bloco
+            if (i == 0) {
+                if (blocksPattern[i] == 1 && blocksPattern[i + 1] == 0)
+                    blocksPattern[i + 1] = 1;
+
+            // Bloco no final
+            } else if (i == MaxNumOfBlocksPerLine - 1) {
+                if (blocksPattern[i] == 1 && blocksPattern[i - 1] == 0)
+                    blocksPattern[i - 1] = 1;
+
+            // Bloco está no meio
+            } else {
+                if (blocksPattern[i] == 1 && blocksPattern[i - 1] == 0 && blocksPattern[i + 1] == 0) {
+
+                    int choose = Random.Range(0, 2);
+
+                    if (choose == 0)
+                        blocksPattern[i - 1] = 1;
+                    else
+                        blocksPattern[i + 1] = 1;
+                }
+            }
+        }
+
 
     }
 
     // sorteia o valor de cada bloco presente na linha sem que haja dois de mesmo valor sendo vizinhos
     private void randomizeValue() {
 
-        // To Do
+        int[] possibleValues = { 1, 2, 4, 8};
+
+        int index = 0;
+        int randomValue = 1;
+
+        // Randomiza valores para os bloquinhos
+        for (int i = 0; i < MaxNumOfBlocksPerLine; i++) {
+
+            if (blocksPattern[i] != 0) {
+                index = Random.Range(0, possibleValues.Length);
+                randomValue = possibleValues[index];
+
+                blocksPattern[i] = randomValue;
+            }
+        }
+
+        // Não permite que tenha dois numero de valores iguais um do lado do outro
+        for (int i = 0; i < MaxNumOfBlocksPerLine; i++) {
+
+            // Primeiro bloco
+            if (i == 0) {
+                if (blocksPattern[i] == blocksPattern[i + 1]) {
+
+                    while (blocksPattern[i] == blocksPattern[i + 1]) {
+                        index = Random.Range(0, possibleValues.Length);
+                        randomValue = possibleValues[index];
+
+                        blocksPattern[i] = randomValue;
+                    }
+                }
+
+            // Bloco no final
+            } else if (i == MaxNumOfBlocksPerLine - 1) {
+                if (blocksPattern[i] == blocksPattern[i - 1]) {
+
+                    while (blocksPattern[i] == blocksPattern[i - 1]) {
+                        index = Random.Range(0, possibleValues.Length);
+                        randomValue = possibleValues[index];
+
+                        blocksPattern[i] = randomValue;
+                    }
+                }
+
+            // Bloco está no meio
+            } else {
+                if (blocksPattern[i] == blocksPattern[i - 1] || blocksPattern[i] == blocksPattern[i + 1]) {
+                    while (blocksPattern[i] == blocksPattern[i - 1] || blocksPattern[i] == blocksPattern[i + 1]) {
+                        index = Random.Range(0, possibleValues.Length);
+                        randomValue = possibleValues[index];
+
+                        blocksPattern[i] = randomValue;
+                    }
+                }
+            }
+        }
 
     }
 

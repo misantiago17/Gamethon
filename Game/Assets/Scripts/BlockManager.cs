@@ -83,17 +83,17 @@ public class BlockManager : MonoBehaviour
                 //updateBlockText();
                 //gameObject.GetComponent<Animator>().SetTrigger("Death");
 
-                GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
+                //GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
 
                 int index = 0;
-                for (int i = RandomizeBlocks.Instance.initLine; i < RandomizeBlocks.Instance.initLine + BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+                /*for (int i = RandomizeBlocks.Instance.initLine; i < RandomizeBlocks.Instance.initLine + BlockGrid.Instance.numHorizontalBlocks - 2; i++)
                 {
                     for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
                     {
                         if (spawned[i, j] == this.gameObject)
                             index = i;
                     }
-                }
+                }*/
 
                 Debug.Log("Index: " + index);
 
@@ -111,11 +111,11 @@ public class BlockManager : MonoBehaviour
                     {
                         if (j != BlockGrid.Instance.numHorizontalBlocks - 3)
                         {
-                            if (spawned[index, j] == spawned[index, j++])
+                           /* if (spawned[index, j] == spawned[index, j++])
                             {
                                 Debug.Log("Reverifiquei: " + j);
                                 MergeBlocks.Instance.MergeCheck(spawned[index, j]);
-                            }
+                            }*/
                         }
                         else
                         {
@@ -128,8 +128,8 @@ public class BlockManager : MonoBehaviour
                 int count = 0;
                 for(int j=0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
                 {
-                    if (spawned[index, j] != null)
-                        count++;
+                    /*if (spawned[index, j] != null)
+                        count++;*/
                 }
 
                 Debug.Log("Numero de itens na linha: " + count);
@@ -138,13 +138,13 @@ public class BlockManager : MonoBehaviour
                 {
                     for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
                     {
-                        if (spawned[index, j] != null)
+                        /*if (spawned[index, j] != null)
                         {
                             Debug.Log("Apaguei linha sozinha");
                             Destroy(spawned[index, j].gameObject);
                             spawned[index, j] = null;
                             RandomizeBlocks.Instance.initLine++;
-                        }
+                        }*/
                     }
                 }
 

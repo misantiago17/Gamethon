@@ -12,8 +12,10 @@ public class BulletInstance : MonoBehaviour {
 
     [Space(5)]
     public int MaxBulletValue = 8;
+    public float BulletLifetime = 15.0f;
 
     private Bullet bulletData;
+    private float DeathTimer = 0;
 
     /// ------- Funções de básicas ----------
 
@@ -23,6 +25,16 @@ public class BulletInstance : MonoBehaviour {
             bulletData = new Bullet();
 
         bulletData.setMaxPosibleValue(MaxBulletValue);
+    }
+
+    private void Update() {
+
+        // Se a bala não encontrar um alvo em até 7 segundos e também e não colidiu com o destroyer
+        // Ela se retira do gameobject
+        DeathTimer += Time.deltaTime;
+        if(DeathTimer >= BulletLifetime) {
+            Destroy(this.gameObject);
+        }
     }
 
     /// ------- Funções de controle de valor do tiro ----------

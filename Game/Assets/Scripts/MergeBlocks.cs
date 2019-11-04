@@ -49,26 +49,26 @@ public class MergeBlocks : MonoBehaviour
     // Verifica se há merges para serem feitos, fazer isso enquanto ?
     public bool MergeCheck(GameObject bloquinho)
     {
-        int lineInitial = RandomizeBlocks.Instance.initLine;
-        Debug.Log("linha inicial: " + lineInitial);
-        Debug.Log("linha final: " + (lineInitial + BlockGrid.Instance.numHorizontalBlocks - 2));
+        //int lineInitial = RandomizeBlocks.Instance.initLine;
+        //Debug.Log("linha inicial: " + lineInitial);
+        //Debug.Log("linha final: " + (lineInitial + BlockGrid.Instance.numHorizontalBlocks - 2));
 
-        GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
+        //GameObject[,] spawned = RandomizeBlocks.Instance.SpawnedBlocks;
 
-        for (int i = lineInitial; i < lineInitial + BlockGrid.Instance.numHorizontalBlocks - 2; i++)
-        {
+        //for (int i = lineInitial; i < lineInitial + BlockGrid.Instance.numHorizontalBlocks - 2; i++)
+        //{
             for (int j = 0; j < BlockGrid.Instance.numHorizontalBlocks - 2; j++)
             {
-                if(spawned[i, j] != null)
-                {
-                    if (spawned[i, j] == bloquinho)
-                    {
+                //if(spawned[i, j] != null)
+                //{
+                    //if (spawned[i, j] == bloquinho)
+                    //{
                         // primeiro elemento da linha
                         if (j == 0)
                         {
 
-                            if (spawned[i, j + 1] != null)
-                            {
+                            //if (spawned[i, j + 1] != null)
+                           // {
                                 /*if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j + 1].GetComponent<BlockManager>().BlockValue)
                                 {
                                     Debug.Log("Primeiro");
@@ -77,13 +77,13 @@ public class MergeBlocks : MonoBehaviour
                                     updateTextPoints();
                                     return true;
                                 }*/
-                            }
+                           // }
 
                         }
                         else if (j == BlockGrid.Instance.numHorizontalBlocks - 3) // ultimo
                         {
-                            if (spawned[i, j - 1] != null)
-                            {
+                           // if (spawned[i, j - 1] != null)
+                            //{
                                 //Debug.Log("i:" + i + "j:" + j);
                                 /*if (spawned[i, j].GetComponent<BlockManager>().BlockValue == spawned[i, j - 1].GetComponent<BlockManager>().BlockValue)
                                 {
@@ -93,7 +93,7 @@ public class MergeBlocks : MonoBehaviour
                                     updateTextPoints();
                                     return true;
                                 }*/
-                            }
+                            //}
                             
                         }
                         else
@@ -136,11 +136,11 @@ public class MergeBlocks : MonoBehaviour
                             }*/
 
                         }
-                    }
-                }
+                    //}
+                //}
                 
             }
-        }
+        //}
 
         return false;
 
