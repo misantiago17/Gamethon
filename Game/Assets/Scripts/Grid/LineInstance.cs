@@ -66,12 +66,22 @@ public class LineInstance: MonoBehaviour
 
         int index = block.GetComponent<BlocoInstance>().getBlockLineIndex();
 
-        if (blockList[index] == block) {
-            blockList.RemoveAt(index);
+        Debug.Log("Removi bloco");
+
+        blocksPattern[index] = 0;
+        int num = lineData.getNumOfBlocks() - 1;
+        lineData.setNumOfBlocks(num);
+
+        /*if (blockList[index] == block) {
+            Debug.Log("Removi bloco");
+            //blockList.InsertRange(index, null);
+            //blockList.RemoveAt(index);
             blocksPattern[index] = 0;
             int num = lineData.getNumOfBlocks() - 1;
             lineData.setNumOfBlocks(num);
-        }
+            // Retira do jogo
+            //Destroy(this.gameObject);
+        }*/
     }
 
     public void UpdateBlockPatternValue(int value, int index) {
@@ -112,6 +122,10 @@ public class LineInstance: MonoBehaviour
                 int value = blocksPattern[i];
                 block.GetComponent<BlocoInstance>().SetBlockData(value, lineData.getID(), i);
                 blockList.Add(block);
+
+            // bug fix
+            } else {
+                blockList.Add(null);
             }
         }
 
@@ -239,6 +253,45 @@ public class LineInstance: MonoBehaviour
     // faz isso até que todos os merges da linha foram completados
     public void MergeCheck(int blockIndex) {
 
+        BlocoInstance blockInfo = blockList[blockIndex].GetComponent<BlocoInstance>();
+
+        // Caso não tenha um merge ele para a função recursiva
+        bool temMerge = false;
+        // Atualiza o index a ser verificado da proxima vez caso necessário
+        int currentIndex = blockIndex;
+
+        // Precisa verificar a posição do bloco porque isso afeta se é possivel verificar blocos à esquerda e direita ou não (se não está na extremidade da lista ou não) 
+
+        // Caso 1: o bloco está no centro e está entre dois blocos
+        if ((currentIndex != 0 && currentIndex != MaxNumOfBlocksPerLine - 1) && (blocksPattern[currentIndex-1] != 0 && blocksPattern[currentIndex + 1] != 0)) {
+
+
+            // - Verifica se há blocos à esquerda e direita são iguais a ele -> caso sim, adiciona valor a si mesmo, some com os dois do lado, puxa todos para o centro e atualiza o index
+            //// - Verifica se há blocos à esquerda iguais a ele -> caso sim, adiciona valor ao bloco à si mesmo e some com o da esquerda e puxa todos para a direita, atualiza o index
+            //// - Verifica se há blocos à direita iguais a ele -> caso sim, adiciona valor ao bloco à si mesmo e some com o da direita e puxa todos para a esquerda, atualiza o index
+
+            Debug.Log("Está em um bloco entre dois blocos");
+
+        // Caso 2: o bloco atingido foi o da extrema esquerda ou não é o ultimo bloco e tem blocos à direita 
+        // - Verifica se há blocos à direita iguais a ele-> caso sim, aumenta si mesmo, some com a da direita e puxa todos para a esquerda
+        } else if (currentIndex == 0 || (currentIndex != MaxNumOfBlocksPerLine-1 && blocksPattern[currentIndex + 1] != 0)) {
+
+            Debug.Log("Está num bloco de ponta esquerda");
+
+        // Caso 3: o bloco atingido foi o da extrema direita ou não é o primeiro bloco e tem blocos à esquerda 
+        // - Verifica se há blocos à esquerda iguais a ele -> caso sim, aumenta si mesmo, some com a da esquerda e puxa todos para a direita 
+        } else if (currentIndex == MaxNumOfBlocksPerLine - 1 || (currentIndex != 0 && blocksPattern[currentIndex - 1] != 0)) {
+
+            Debug.Log("Está num bloco de ponta direita");
+        }
+
+        // Caso 4: o bloco está sozinho - nada acontece feijoada
+    }
+
+    // Verifica se tem merges a serem feitos
+    // faz isso até que todos os merges da linha foram completados
+    /*public void MergeCheck(int blockIndex) {
+
         Debug.Log("avaliando o merge");
 
         BlocoInstance blockInfo = blockList[blockIndex].GetComponent<BlocoInstance>();
@@ -250,15 +303,34 @@ public class LineInstance: MonoBehaviour
         // Puxa todos os blocos à esquerda 1 à direita
         if (blocksPattern[blockIndex] == blockInfo.MaxBlockValue) {
 
-            Merge(blockIndex, true);
+            StartCoroutine(WaitTillBlockExplode(blockInfo, blockIndex));
+            // NAO FOI FEITO - ULTIMO CASO
 
         } else {
 
+            if (blocksPattern[blockIndex - 1] != 0)
+                Debug.Log("valor direita: " + blocksPattern[blockIndex - 1]);
+            if (blocksPattern[blockIndex - 1] != 0)
+                Debug.Log("valor meio: " + blocksPattern[blockIndex]);
+            if (blocksPattern[blockIndex - 1] != 0)
+                Debug.Log("valor final: " + blocksPattern[blockIndex + 1]);
+
             //Caso 1: Se for o entre tres blocos, aumenta o valor dele, apaga os dois ao lado, e se houverem vizinhos de qualquer um dos lados, eles assumem a posicao dos vizinhos
+            if ((blocksPattern[blockIndex - 1] != null && blocksPattern[blockIndex - 1] != null) &&
+                (blocksPattern[blockIndex] == blocksPattern[blockIndex -1] && blocksPattern[blockIndex] == blocksPattern[blockIndex - 1])) {
+                // NAO FOI FEITO AINDA
+                Debug.Log("caso do meio");
 
             //Caso 2: Se tiver um vizinho a direita igual, aumenta o valor do vizinho a direita, apaga o da esquerda e se houverem viznhos a esquerda puxa todos eles para um a direita
+            } else if ((blocksPattern[blockIndex + 1] != null) && (blocksPattern[blockIndex] == blocksPattern[blockIndex + 1])) {
+
+                Debug.Log("Visinho à direita é igual");
 
             //Caso 3: Se tiver um vizinho a esquerda igual, aumenta o valor do vizinho a esquerda, apaga o da direita e se houverem viznhos a direita puxa todos eles para um a esquerda
+            } else if ((blocksPattern[blockIndex - 1] != null) && (blocksPattern[blockIndex] == blocksPattern[blockIndex - 1])) {
+
+                Debug.Log("Visinho à esquerda é igual");
+            }
 
         }
 
@@ -280,7 +352,7 @@ public class LineInstance: MonoBehaviour
         // Refaz o código se ainda for visto que está dentro de um desses casos ( talvez usar uma bool que se torna true se entra em um dos casos e se for true ele chama de novo o código)
 
 
-    }
+    }*/
 
     // Faz o merge lentamente amem
     private void Merge(int blocoIndex, bool pullRight) {
@@ -296,6 +368,22 @@ public class LineInstance: MonoBehaviour
 
 
     /// ------- Funções de fazer a linha cair ---------- 
+    /// 
+
+    IEnumerator WaitTillBlockExplode(BlocoInstance bloco, int index) {
+
+        while (bloco != null) {
+            yield return new WaitForEndOfFrame();
+        }
+
+        Merge(index, true);
+    }
+
+    IEnumerator WaitToPull() {
+
+        yield return new WaitForSeconds(0);
+
+    }
 
     // Faz as linhas cairem enquanto elas existirem
     IEnumerator MakeItFall() {

@@ -185,11 +185,14 @@ public class BlocoInstance : MonoBehaviour {
         } else {
             yield return new WaitForSeconds(1.5f);
         }
-
         // retira da grid
         GridManager.Instance.RemoveBlockFromLine(this.gameObject);
+
         // Retira do jogo
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+
+        // Retira do jogo
+        //Destroy(this.gameObject);
 
         // Faz o merge das colunas ao lado se ainda houver vizinhos 
         //MergeBlocks.Instance.MergeCheck(this.gameObject);

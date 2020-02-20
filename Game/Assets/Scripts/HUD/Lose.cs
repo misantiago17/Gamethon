@@ -26,9 +26,11 @@ public class Lose: MonoBehaviour
 
     public void activateLoseMenu() {
         if (!isOnLoseMenu) {
+
             LoseMenu.SetActive(true);
             StartCoroutine(showLoseMenu());
             Time.timeScale = 0.0f;
+            GameManager.Instance.GameOver = true;
             isOnLoseMenu = true;
         }
     }
@@ -37,6 +39,7 @@ public class Lose: MonoBehaviour
         if (isOnLoseMenu) {
             Time.timeScale = 1.0f;
             LoseMenu.SetActive(false);
+            GameManager.Instance.GameOver = false;
             isOnLoseMenu = false;
         }
     }

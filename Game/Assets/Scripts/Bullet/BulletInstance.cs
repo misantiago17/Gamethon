@@ -62,7 +62,7 @@ public class BulletInstance : MonoBehaviour {
         if (Aura) {
             auraRend = Aura.GetComponent<SpriteRenderer>();
         } else {
-            Debug.LogError("Falta componente SpriteRenderer na aura");
+            //Debug.LogError("Falta componente SpriteRenderer na aura");
         }
 
         switch (bulletValue) {
