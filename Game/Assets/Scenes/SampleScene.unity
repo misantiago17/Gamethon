@@ -1019,6 +1019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 1495960589}
+  isOnPause: 0
 --- !u!4 &521838950
 Transform:
   m_ObjectHideFlags: 0
@@ -1795,7 +1796,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 6670690f4eca9d8469d7a9ce7885b330, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -2085,7 +2086,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 916132838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.388, y: 5.58, z: 0}
+  m_LocalPosition: {x: -3.388, y: 4.76, z: 0}
   m_LocalScale: {x: 1.0861795, y: 10.059954, z: 1}
   m_Children: []
   m_Father: {fileID: 365344857}
@@ -2321,7 +2322,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 309242891}
-        m_MethodName: GoToGame2
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2669,7 +2670,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 63fc5b0c8cd73dc46bdba8d7eef576c7, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -8479,6 +8480,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908018699}
   m_CullTransparentMesh: 0
+--- !u!1 &2068370113 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7358903260219911644, guid: 6e27b93aa5d2412499dce0c2807b3ccb,
+    type: 3}
+  m_PrefabInstance: {fileID: 8389561582998012749}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2068370117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068370113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb2d241589780a24c803b02dcb629034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoseMenu: {fileID: 792823403}
+  isOnLoseMenu: 0
 --- !u!1 &2078018152
 GameObject:
   m_ObjectHideFlags: 0

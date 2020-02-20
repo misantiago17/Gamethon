@@ -37,12 +37,15 @@ public class Hold : MonoBehaviour
         Bolinha.GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
-    private void OnMouseDown()
-    {
-        holding = true;
+    private void OnMouseDown() { 
 
-        currentValue = 1;
-        currentBolinha = Instantiate(Bolinha, Player.transform.position, this.transform.rotation) ;
+        if (!Pause.Instance.isOnPause) {
+            holding = true;
+
+            currentValue = 1;
+            currentBolinha = Instantiate(Bolinha, Player.transform.position, this.transform.rotation);
+        }
+        
     }
 
 	private void OnMouseUp()

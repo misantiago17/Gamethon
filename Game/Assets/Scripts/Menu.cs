@@ -11,8 +11,9 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void GoToGame2()
+    public void RestartGame()
     {
+        Lose.Instance.deactivateLoseMenu();
         SceneManager.LoadScene(2);
     }
 
