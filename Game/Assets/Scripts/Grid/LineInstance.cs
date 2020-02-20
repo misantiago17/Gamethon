@@ -60,6 +60,10 @@ public class LineInstance: MonoBehaviour
         return pos;
     }
 
+    public int getLineID() {
+        return lineData.getID();
+    }
+
     /// ------- Funções de controle da lista de blocos ----------
 
     public void RemoveBlockFromLine(GameObject block) {
@@ -68,11 +72,11 @@ public class LineInstance: MonoBehaviour
 
         Debug.Log("Removi bloco");
 
-        blocksPattern[index] = 0;
+        /*blocksPattern[index] = 0;
         int num = lineData.getNumOfBlocks() - 1;
-        lineData.setNumOfBlocks(num);
+        lineData.setNumOfBlocks(num);*/
 
-        /*if (blockList[index] == block) {
+        if (blockList[index] == block) {
             Debug.Log("Removi bloco");
             //blockList.InsertRange(index, null);
             //blockList.RemoveAt(index);
@@ -81,7 +85,7 @@ public class LineInstance: MonoBehaviour
             lineData.setNumOfBlocks(num);
             // Retira do jogo
             //Destroy(this.gameObject);
-        }*/
+        }
     }
 
     public void UpdateBlockPatternValue(int value, int index) {

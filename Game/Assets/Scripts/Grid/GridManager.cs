@@ -37,7 +37,8 @@ public class GridManager : MonoBehaviour
 
         for(int i=0; i<lineList.Count; i++) {
 
-            if(lineList[i].GetComponent<LineInstance>().GetInstanceID() == block.GetComponent<BlocoInstance>().getBlockLineID()) {
+            if (lineList[i].GetComponent<LineInstance>().getLineID() == block.GetComponent<BlocoInstance>().getBlockLineID()) {
+
                 lineList[i].GetComponent<LineInstance>().RemoveBlockFromLine(block);
 
                 // Se a linha está vazia apaga seu gameobject
