@@ -258,86 +258,72 @@ public class LineInstance: MonoBehaviour
 
         BlocoInstance blockInfo = blockList[blockIndex].GetComponent<BlocoInstance>();
 
-        // Atualiza o index a ser verificado da proxima vez caso necessário ------ ?
-        int currentIndex = blockIndex;
+        // Caso 4: o bloco está em seu ultimo valor
+        if (blocksPattern[blockIndex] == blockList[blockIndex].GetComponent<BlocoInstance>().MaxBlockValue) {
 
-        // Caso 1: o bloco está no centro e está entre dois blocos
-        if ((currentIndex != 0 && currentIndex != MaxNumOfBlocksPerLine - 1) && (blocksPattern[currentIndex-1] != 0 && blocksPattern[currentIndex + 1] != 0)) {
+            // Verifica se há blocos à direita e à esquerda --- puxa para direita porque sim
+            if ((blockIndex != MaxNumOfBlocksPerLine - 1 && blockIndex != 0) && (blocksPattern[blockIndex - 1] != 0 && blocksPattern[blockIndex + 1] != 0)) {
 
-            Debug.Log("Está em um bloco entre dois blocos");
+                Debug.Log("Estou em meu ultimo valor e estou entre blocos");
+                StartCoroutine(WaitTillBlockExplode(blockList[blockIndex].GetComponent<BlocoInstance>(), blockIndex));
+            }
+
+         // Caso 1: o bloco está no centro e está entre dois blocos
+        } else if ((blockIndex != 0 && blockIndex != MaxNumOfBlocksPerLine - 1) && (blocksPattern[blockIndex-1] != 0 && blocksPattern[blockIndex + 1] != 0)) {
 
             // - Verifica se há blocos à esquerda e direita são iguais a ele -> caso sim, aumenta seu valor e some com os dois do lado, puxa TODOS para o centro
-            if ((blocksPattern[currentIndex - 1] == blocksPattern[currentIndex]) && (blocksPattern[currentIndex + 1] == blocksPattern[currentIndex])) {
+            if ((blocksPattern[blockIndex - 1] == blocksPattern[blockIndex]) && (blocksPattern[blockIndex + 1] == blocksPattern[blockIndex])) {
 
                 Debug.Log("Os dois blocos ao meu lado são iguais");
-                StartCoroutine(Merge(currentIndex, true, true));
-                //Merge(currentIndex, true, true);
+                int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
+                blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
+                StartCoroutine(WaitForUpgradeMerge(blockIndex, true, true));
 
                 // - Verifica se há blocos à esquerda iguais a ele -> caso sim, aumenta seu valor e some com o da esquerda e puxa todos os blocos da ESQUERDA
-            } else if (blocksPattern[currentIndex - 1] == blocksPattern[currentIndex]) {
+            } else if (blocksPattern[blockIndex - 1] == blocksPattern[blockIndex]) {
 
                 Debug.Log("O blocos a minha esquerda é igual");
-                StartCoroutine(Merge(currentIndex, true, false));
-                //Merge(currentIndex, false, true);
+                int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
+                blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
+                StartCoroutine(WaitForUpgradeMerge(blockIndex, true, false));
 
                 // - Verifica se há blocos à direita iguais a ele -> caso sim, aumenta seu valor e some com o da direita e puxa todos os blocos da DIREITA
-            } else if (blocksPattern[currentIndex + 1] == blocksPattern[currentIndex]) {
+            } else if (blocksPattern[blockIndex + 1] == blocksPattern[blockIndex]) {
 
                 Debug.Log("O blocos a minha direita é igual");
-                StartCoroutine(Merge(currentIndex, false, true));
-                //Merge(currentIndex, true, false);
-
+                int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
+                blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
+                StartCoroutine(WaitForUpgradeMerge(blockIndex, false, true));
             }
 
             // Caso 2: o bloco atingido foi o da extrema esquerda ou não é o ultimo bloco e tem blocos à direita 
-        } else if (currentIndex == 0 || (currentIndex != MaxNumOfBlocksPerLine-1 && blocksPattern[currentIndex + 1] != 0)) {
-
-            Debug.Log("Está num bloco de ponta esquerda");
+        } else if (blockIndex == 0 || (blockIndex != MaxNumOfBlocksPerLine-1 && blocksPattern[blockIndex + 1] != 0)) {
 
             // - Verifica se há blocos à direita iguais a ele-> caso sim, aumenta seu valor e some com a da direita e puxa todos todos os blocos da DIREITA
-            if (blocksPattern[currentIndex + 1] == blocksPattern[currentIndex]) {
+            if (blocksPattern[blockIndex + 1] == blocksPattern[blockIndex]) {
 
                 Debug.Log("O blocos a minha direita é igual");
-                StartCoroutine(Merge(currentIndex, false, true));
-                //Merge(currentIndex, true, false);
+                int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
+                blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
+                StartCoroutine(WaitForUpgradeMerge(blockIndex, false, true));
             }
 
         // Caso 3: o bloco atingido foi o da extrema direita ou não é o primeiro bloco e tem blocos à esquerda 
-        } else if (currentIndex == MaxNumOfBlocksPerLine - 1 || (currentIndex != 0 && blocksPattern[currentIndex - 1] != 0)) {
-
-            Debug.Log("Está num bloco de ponta direita");
+        } else if (blockIndex == MaxNumOfBlocksPerLine - 1 || (blockIndex != 0 && blocksPattern[blockIndex - 1] != 0)) {
 
             // - Verifica se há blocos à esquerda iguais a ele -> caso sim, aumenta seu valor e some com a da esquerda e puxa todos os blocas da ESQUERDA
-            if (blocksPattern[currentIndex - 1] == blocksPattern[currentIndex]) {
+            if (blocksPattern[blockIndex - 1] == blocksPattern[blockIndex]) {
 
                 Debug.Log("O blocos a minha esquerda é igual");
-                StartCoroutine(Merge(currentIndex, true, false));
-                //Merge(currentIndex, false, true);
+                int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
+                blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
+                StartCoroutine(WaitForUpgradeMerge(blockIndex, true, false));
             }
-        }
 
-        // Caso 4: o bloco está sozinho - nada acontece feijoada ------ ? verificar se é o ultimo valor (faz merge dos lados)
+        } 
+
+        // Caso 5: o bloco está sozinho - nada acontece feijoada
     }
-
-    /*// Faz o merge lentamente amem
-    private void Merge(int blocoIndex, bool pullLeft, bool pullRight) {
-
-        // Some com o bloco à direita e puxa todos os blocos à sua direita para a esquerda
-        if (pullLeft) {
-
-            StartCoroutine(Merge(blocoIndex, pullLeft, pullRight));
-            RemoveBlockFromLine(blockList[blocoIndex + 1]);
-            // Chama a corotina para fazer esse merge
-        }
-
-        // Some com o bloco à esquerda e puxa todos os blocos à sua esquerda para a direita
-        if (pullRight) {
-
-            RemoveBlockFromLine(blockList[blocoIndex - 1]);
-
-        }
-
-    }*/
 
     // troca o valor no blockPattern
     // upgrade o valor do bloco para o do bloco copia
@@ -355,14 +341,34 @@ public class LineInstance: MonoBehaviour
     /// ------- Funções de fazer a linha cair e merge com corotina ---------- 
     /// 
 
-    /*IEnumerator WaitTillBlockExplode(BlocoInstance bloco, int index) {
+    IEnumerator WaitTillBlockExplode(BlocoInstance bloco, int index) {
 
-        while (bloco != null) {
+        bloco.canDestroy = false;
+
+        while (!bloco.canDestroy) {
             yield return new WaitForEndOfFrame();
         }
 
-        Merge(index, true);
-    }*/
+        blocksPattern[index] = 0;
+        StartCoroutine(Merge(index - 1, false, true));
+    }
+
+    IEnumerator WaitForUpgradeMerge(int index, bool pullLeft, bool pullRight) {
+
+        if (pullLeft) {
+            blocksPattern[index - 1] = 0;
+            blockList[index - 1].GetComponent<BlocoInstance>().updateBlockValue(0);
+        }
+
+        if (pullRight) {
+            blocksPattern[index + 1] = 0;
+            blockList[index + 1].GetComponent<BlocoInstance>().updateBlockValue(0);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+        StartCoroutine(Merge(index, pullLeft, pullRight));
+    }
 
     // Recebe o index do item que foi incrementado
     IEnumerator Merge(int index, bool pullLeft, bool pullRight) {
@@ -428,12 +434,12 @@ public class LineInstance: MonoBehaviour
             if (MergeAnimation) {
                 yield return WaitForAnimation(MergeAnimation);
             } else {
-                yield return new WaitForSeconds(0.4f);
+                yield return new WaitForSeconds(0.3f);
             }
         }
 
         // Faz a recursão
-        //MergeCheck(index);
+        MergeCheck(index);
     }
 
     private IEnumerator WaitForAnimation(Animation animation) {

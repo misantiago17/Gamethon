@@ -14,6 +14,9 @@ public class BlocoInstance : MonoBehaviour {
     public Sprite[] TileSprite;
     public RuntimeAnimatorController[] AnimationController;
 
+    // nao pode destruir se precisar fazer merge depois de estar no limite
+    [HideInInspector] public bool canDestroy = true;
+
     // Required
     private AudioSource audioPunch;
 
@@ -63,39 +66,30 @@ public class BlocoInstance : MonoBehaviour {
             case 1:
                 spriteRend.sprite = TileSprite[0];
                 animator.runtimeAnimatorController = AnimationController[0];
-                StartCoroutine(waitAnimationToMerge());
                 break;
 
             // amarelo
             case 2:
                 spriteRend.sprite = TileSprite[1];
                 animator.runtimeAnimatorController = AnimationController[1];
-                StartCoroutine(waitAnimationToMerge());
-    
                 break;
 
             // laranja
             case 4:
                 spriteRend.sprite = TileSprite[2];
                 animator.runtimeAnimatorController = AnimationController[2];
-                StartCoroutine(waitAnimationToMerge());
-
                 break;
 
             // vermelho
             case 8:
                 spriteRend.sprite = TileSprite[3];
                 animator.runtimeAnimatorController = AnimationController[3];
-                StartCoroutine(waitAnimationToMerge());
-
                 break;
 
             // roxo
             case 16:
                 spriteRend.sprite = TileSprite[4];
                 animator.runtimeAnimatorController = AnimationController[4];
-                StartCoroutine(waitAnimationToMerge());
-
                 AutodestructBlock();
                 break;
 
@@ -105,8 +99,6 @@ public class BlocoInstance : MonoBehaviour {
                 Debug.LogError("Valor do bloco errado");
                 spriteRend.sprite = TileSprite[0];
                 animator.runtimeAnimatorController = AnimationController[0];
-                StartCoroutine(waitAnimationToMerge());
-
                 break;
 
         }
@@ -162,8 +154,7 @@ public class BlocoInstance : MonoBehaviour {
                     updateBlockValue(newValue);
 
                     // Faz o merge na corotina esperqando a animação de mudança de cor
-                    //GameObject line = this.transform.parent.gameObject;
-                    //line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());
+                    StartCoroutine(waitAnimationToMerge());;
 
                     // BIG HUGE OBS: ----------------------------------------------------------------!
                     // o outro código estava tentando repetir as iterações do merge por aqui (coisa nada saudavel)
@@ -194,6 +185,7 @@ public class BlocoInstance : MonoBehaviour {
     }
 
     public void AutodestructBlock() {
+
         StartCoroutine(Autodestruct());
     }
 
@@ -205,23 +197,25 @@ public class BlocoInstance : MonoBehaviour {
         } else {
             yield return new WaitForSeconds(1.5f);
         }
-        // retira da grid
-        GridManager.Instance.RemoveBlockFromLine(this.gameObject);
 
-        // Retira do jogo
-        this.gameObject.SetActive(false);
+        if (canDestroy) {
+            // retira da grid
+            GridManager.Instance.RemoveBlockFromLine(this.gameObject);
 
-        // Retira do jogo
-        //Destroy(this.gameObject);
+            // Retira do jogo
+            this.gameObject.SetActive(false);
 
-        // Faz o merge das colunas ao lado se ainda houver vizinhos 
-        //MergeBlocks.Instance.MergeCheck(this.gameObject);
+        } else {
+
+            updateBlockValue(0);
+            canDestroy = true;
+        }
 
     }
 
     private IEnumerator waitAnimationToMerge() {
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.5f);
 
         GameObject line = this.transform.parent.gameObject;
         line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());
