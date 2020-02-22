@@ -32,7 +32,7 @@ public class BlocoInstance : MonoBehaviour {
         return blockData.getValue();
     }
 
-    private void updateBlockValue(int value) {
+    public void updateBlockValue(int value) {
         blockData.setValue(value);
 
         GameObject line = this.transform.parent.gameObject;
@@ -48,36 +48,54 @@ public class BlocoInstance : MonoBehaviour {
         SpriteRenderer spriteRend = gameObject.GetComponent<SpriteRenderer>();
         Animator animator = gameObject.GetComponent<Animator>();
 
+        if (spriteRend.enabled == false)
+            spriteRend.enabled = true;
+
         switch (blockValue) {
+
+            // invisivel (está me processo de merge)
+            case 0:
+                spriteRend.enabled = false;
+                //animator.runtimeAnimatorController = AnimationController[0];
+            break;
 
             // verde
             case 1:
                 spriteRend.sprite = TileSprite[0];
                 animator.runtimeAnimatorController = AnimationController[0];
+                StartCoroutine(waitAnimationToMerge());
                 break;
 
             // amarelo
             case 2:
                 spriteRend.sprite = TileSprite[1];
                 animator.runtimeAnimatorController = AnimationController[1];
+                StartCoroutine(waitAnimationToMerge());
+    
                 break;
 
             // laranja
             case 4:
                 spriteRend.sprite = TileSprite[2];
                 animator.runtimeAnimatorController = AnimationController[2];
+                StartCoroutine(waitAnimationToMerge());
+
                 break;
 
             // vermelho
             case 8:
                 spriteRend.sprite = TileSprite[3];
                 animator.runtimeAnimatorController = AnimationController[3];
+                StartCoroutine(waitAnimationToMerge());
+
                 break;
 
             // roxo
             case 16:
                 spriteRend.sprite = TileSprite[4];
                 animator.runtimeAnimatorController = AnimationController[4];
+                StartCoroutine(waitAnimationToMerge());
+
                 AutodestructBlock();
                 break;
 
@@ -87,6 +105,8 @@ public class BlocoInstance : MonoBehaviour {
                 Debug.LogError("Valor do bloco errado");
                 spriteRend.sprite = TileSprite[0];
                 animator.runtimeAnimatorController = AnimationController[0];
+                StartCoroutine(waitAnimationToMerge());
+
                 break;
 
         }
@@ -141,9 +161,9 @@ public class BlocoInstance : MonoBehaviour {
                     int newValue = blockValue * 2;
                     updateBlockValue(newValue);
 
-                    // Faz o merge 
-                    GameObject line = this.transform.parent.gameObject;
-                    line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());
+                    // Faz o merge na corotina esperqando a animação de mudança de cor
+                    //GameObject line = this.transform.parent.gameObject;
+                    //line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());
 
                     // BIG HUGE OBS: ----------------------------------------------------------------!
                     // o outro código estava tentando repetir as iterações do merge por aqui (coisa nada saudavel)
@@ -197,6 +217,14 @@ public class BlocoInstance : MonoBehaviour {
         // Faz o merge das colunas ao lado se ainda houver vizinhos 
         //MergeBlocks.Instance.MergeCheck(this.gameObject);
 
+    }
+
+    private IEnumerator waitAnimationToMerge() {
+
+        yield return new WaitForSeconds(0.7f);
+
+        GameObject line = this.transform.parent.gameObject;
+        line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());
     }
 
     private IEnumerator WaitForAnimation(Animation animation) {
