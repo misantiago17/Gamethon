@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletThrow : MonoBehaviour
 {
-    public float Force = 10f;
+    public float Force = 1f;
     public AudioSource audioTiro;
 
     private void Start() {
@@ -13,7 +13,12 @@ public class BulletThrow : MonoBehaviour
 
     public void ThrowBallInDirection(Vector3 direction) {
 
-        this.GetComponent<Rigidbody2D>().velocity = Force * direction;
+        Vector2 vel = Force * direction;
+
+        // Nao permite que saia da velocidade certa
+        vel.Normalize();
+ 
+        this.GetComponent<Rigidbody2D>().velocity = vel * Force;
 
         if (gameObject.transform.GetChild(0).GetComponent<Animator>())
             gameObject.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Shoot");

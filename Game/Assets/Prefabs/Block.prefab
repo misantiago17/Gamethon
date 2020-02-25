@@ -162,8 +162,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 39109125e81ee4c478c8da35ffeccae0, type: 2}
@@ -359,7 +357,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 24b97f1556e8944cdbbb716935cd859c, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -421,21 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab15810a773bb4ef2a8af7a9c5cc89a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 4724292863381514429, guid: 55decb608e5804dc8a5b2c9ef3ac704c, type: 3}
-  Tile:
-  - {fileID: 21300000, guid: 0fbaedc5d00050c478efa02c27161465, type: 3}
-  - {fileID: 21300000, guid: cb646db4239bdc54bb560e4b505ee108, type: 3}
-  - {fileID: 21300000, guid: 46e1b829c9e5ca84c983e32260496a7b, type: 3}
-  - {fileID: 21300000, guid: 675c5ca884dc73d449ddda313f471fc4, type: 3}
-  - {fileID: 21300000, guid: 0a2fda5a88ac3ba479964bf494480dd8, type: 3}
-  animController:
-  - {fileID: 9100000, guid: 4fb80572836eff545921916e316cafb6, type: 2}
-  - {fileID: 9100000, guid: fb1ecb58c3a3c1a42b2cda60e323f7c6, type: 2}
-  - {fileID: 9100000, guid: a0e5f3bc624d48d4eb54a43eba98732d, type: 2}
-  - {fileID: 9100000, guid: 56d0c3bb6e1c35d41a415e3effa602bc, type: 2}
-  - {fileID: 9100000, guid: 9b54526adb73d0e49815606f0211bcfb, type: 2}
-  audioPunch: {fileID: 0}
-  BlockValue: 1
 --- !u!114 &184971109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,3 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a12629003b169943b860c2bae4d6d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxBlockValue: 16
+  AutoDestructAnimation: {fileID: 0}
+  TileSprite: []
+  AnimationController: []
+  canDestroy: 1

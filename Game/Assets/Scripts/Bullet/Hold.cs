@@ -54,7 +54,8 @@ public class Hold : MonoBehaviour
         timer = 0;
 
         // pega a direcao do mouse e aplica a forca na bolinha
-        Vector3 direction = (-1)*(Player.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition)).normalized;
+        Vector3 direction = (-1)*(Player.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
         currentBolinha.GetComponent<BulletThrow>().ThrowBallInDirection(direction);
         //GameObject.FindGameObjectWithTag("Aura").GetComponent<SpriteRenderer>().enabled = false;
     }
