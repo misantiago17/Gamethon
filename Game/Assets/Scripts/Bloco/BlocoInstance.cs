@@ -154,7 +154,7 @@ public class BlocoInstance : MonoBehaviour {
                     updateBlockValue(newValue);
 
                     // Faz o merge na corotina esperqando a animação de mudança de cor
-                    StartCoroutine(waitAnimationToMerge());;
+                    StartCoroutine(waitAnimationToMerge());
 
                     // BIG HUGE OBS: ----------------------------------------------------------------!
                     // o outro código estava tentando repetir as iterações do merge por aqui (coisa nada saudavel)
@@ -211,6 +211,8 @@ public class BlocoInstance : MonoBehaviour {
             canDestroy = true;
         }
 
+        GameManager.Instance.UpdateHUD(250);
+
     }
 
     private IEnumerator waitAnimationToMerge() {
@@ -218,7 +220,9 @@ public class BlocoInstance : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
 
         GameObject line = this.transform.parent.gameObject;
-        line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());
+        bool haveMerge = line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());
+        if (!haveMerge)
+            GameManager.Instance.UpdateHUD(50);
     }
 
     private IEnumerator WaitForAnimation(Animation animation) {

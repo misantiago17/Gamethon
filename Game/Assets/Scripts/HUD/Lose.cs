@@ -21,6 +21,7 @@ public class Lose: MonoBehaviour
     #endregion
 
     public GameObject LoseMenu;
+    public Text scoreText;
 
     [HideInInspector] public bool isOnLoseMenu = false;
 
@@ -28,6 +29,8 @@ public class Lose: MonoBehaviour
         if (!isOnLoseMenu) {
 
             LoseMenu.SetActive(true);
+            if (scoreText)
+                scoreText.text = GameManager.Instance.currentScore.ToString();
             StartCoroutine(showLoseMenu());
             Time.timeScale = 0.0f;
             GameManager.Instance.GameOver = true;

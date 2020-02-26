@@ -8443,6 +8443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoseMenu: {fileID: 792823403}
+  scoreText: {fileID: 1743954669}
   isOnLoseMenu: 0
 --- !u!1 &2078018152
 GameObject:
@@ -13497,6 +13498,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5986721290435042600, guid: e482ac9f1729801448be0da717117147,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 327008969}
     - target: {fileID: 5986721290435042601, guid: e482ac9f1729801448be0da717117147,
         type: 3}
       propertyPath: m_LocalPosition.x

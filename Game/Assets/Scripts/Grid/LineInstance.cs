@@ -254,7 +254,7 @@ public class LineInstance: MonoBehaviour
 
     // Verifica se tem merges a serem feitos
     // faz isso até que todos os merges da linha foram completados
-    public void MergeCheck(int blockIndex) {
+    public bool MergeCheck(int blockIndex) {
 
         BlocoInstance blockInfo = blockList[blockIndex].GetComponent<BlocoInstance>();
 
@@ -265,6 +265,7 @@ public class LineInstance: MonoBehaviour
             if ((blockIndex != MaxNumOfBlocksPerLine - 1 && blockIndex != 0) && (blocksPattern[blockIndex - 1] != 0 && blocksPattern[blockIndex + 1] != 0)) {
 
                 StartCoroutine(WaitTillBlockExplode(blockList[blockIndex].GetComponent<BlocoInstance>(), blockIndex));
+                return true;
             }
 
          // Caso 1: o bloco está no centro e está entre dois blocos
@@ -276,6 +277,7 @@ public class LineInstance: MonoBehaviour
                 int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
                 blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
                 StartCoroutine(WaitForUpgradeMerge(blockIndex, true, true));
+                return true;
 
                 // - Verifica se há blocos à esquerda iguais a ele -> caso sim, aumenta seu valor e some com o da esquerda e puxa todos os blocos da ESQUERDA
             } else if (blocksPattern[blockIndex - 1] == blocksPattern[blockIndex]) {
@@ -283,6 +285,7 @@ public class LineInstance: MonoBehaviour
                 int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
                 blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
                 StartCoroutine(WaitForUpgradeMerge(blockIndex, true, false));
+                return true;
 
                 // - Verifica se há blocos à direita iguais a ele -> caso sim, aumenta seu valor e some com o da direita e puxa todos os blocos da DIREITA
             } else if (blocksPattern[blockIndex + 1] == blocksPattern[blockIndex]) {
@@ -290,6 +293,7 @@ public class LineInstance: MonoBehaviour
                 int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
                 blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
                 StartCoroutine(WaitForUpgradeMerge(blockIndex, false, true));
+                return true;
             }
 
             // Caso 2: o bloco atingido foi o da extrema esquerda ou não é o ultimo bloco e tem blocos à direita 
@@ -301,6 +305,7 @@ public class LineInstance: MonoBehaviour
                 int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
                 blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
                 StartCoroutine(WaitForUpgradeMerge(blockIndex, false, true));
+                return true;
             }
 
         // Caso 3: o bloco atingido foi o da extrema direita ou não é o primeiro bloco e tem blocos à esquerda 
@@ -312,11 +317,13 @@ public class LineInstance: MonoBehaviour
                 int newValue = blockList[blockIndex].GetComponent<BlocoInstance>().getBlockValue() * 2;
                 blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(newValue);
                 StartCoroutine(WaitForUpgradeMerge(blockIndex, true, false));
+                return true;
             }
 
-        } 
+        }
 
         // Caso 5: o bloco está sozinho - nada acontece feijoada
+        return false;
     }
 
     // troca o valor no blockPattern
@@ -367,6 +374,8 @@ public class LineInstance: MonoBehaviour
     // Recebe o index do item que foi incrementado
     IEnumerator Merge(int index, bool pullLeft, bool pullRight) {
 
+        GameManager.Instance.UpdateHUD(100);
+
         int rightIndex = 0;
         int leftIndex = 0;
 
@@ -402,11 +411,7 @@ public class LineInstance: MonoBehaviour
             // Faz o merge da esquerda
             if (pullLeft) {
 
-                Debug.Log("Quero puxar da esquerda");
-
                 if ((leftIndex != 0) && (blocksPattern[leftIndex - 1] != 0)) {
-
-                    Debug.Log("Puxando da esquerda");
 
                     replaceBlock(leftIndex - 1, leftIndex);
                     leftIndex = leftIndex - 1;

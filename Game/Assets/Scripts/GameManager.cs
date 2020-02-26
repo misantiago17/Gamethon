@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class GameManager : MonoBehaviour
 
     public bool GameOver = false;
 
+    [HideInInspector] public int currentScore = 0;
+    public Text scoreText;
+
     private void Awake() {
         if (_instance != null && _instance != this) {
             Destroy(this.gameObject);
@@ -17,4 +21,13 @@ public class GameManager : MonoBehaviour
             _instance = this;
         }
     }
+
+    public void UpdateHUD(int value)
+    {
+        currentScore += value;
+
+        if (scoreText)
+            scoreText.text = currentScore.ToString();
+    }
+
 }
