@@ -195,7 +195,7 @@ public class BlocoInstance : MonoBehaviour {
         if (AutoDestructAnimation) {
             yield return WaitForAnimation(AutoDestructAnimation);
         } else {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.0f);
         }
 
         if (canDestroy) {
@@ -207,6 +207,7 @@ public class BlocoInstance : MonoBehaviour {
 
         } else {
 
+            // Problema ta aqui
             updateBlockValue(0);
             canDestroy = true;
         }
@@ -217,7 +218,7 @@ public class BlocoInstance : MonoBehaviour {
 
     private IEnumerator waitAnimationToMerge() {
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         GameObject line = this.transform.parent.gameObject;
         bool haveMerge = line.GetComponent<LineInstance>().MergeCheck(blockData.getBlockIndexInLine());

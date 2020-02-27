@@ -258,13 +258,13 @@ public class LineInstance: MonoBehaviour
 
         BlocoInstance blockInfo = blockList[blockIndex].GetComponent<BlocoInstance>();
 
-        // Caso 4: o bloco está em seu ultimo valor
+        // Caso 4: o bloco está em seu ultimo valor e tem blocos ao lado
         if (blocksPattern[blockIndex] == blockList[blockIndex].GetComponent<BlocoInstance>().MaxBlockValue) {
 
             // Verifica se há blocos à direita e à esquerda --- puxa para direita porque sim
             if ((blockIndex != MaxNumOfBlocksPerLine - 1 && blockIndex != 0) && (blocksPattern[blockIndex - 1] != 0 && blocksPattern[blockIndex + 1] != 0)) {
 
-                StartCoroutine(WaitTillBlockExplode(blockList[blockIndex].GetComponent<BlocoInstance>(), blockIndex));
+                StartCoroutine(WaitTillBlockExplode(blockList[blockIndex].GetComponent<BlocoInstance>(), blockIndex, false));
                 return true;
             }
 
@@ -296,7 +296,7 @@ public class LineInstance: MonoBehaviour
                 return true;
             }
 
-            // Caso 2: o bloco atingido foi o da extrema esquerda ou não é o ultimo bloco e tem blocos à direita 
+        // Caso 2: o bloco atingido foi o da extrema esquerda ou não é o ultimo bloco e tem blocos à direita 
         } else if (blockIndex == 0 || (blockIndex != MaxNumOfBlocksPerLine-1 && blocksPattern[blockIndex + 1] != 0)) {
 
             // - Verifica se há blocos à direita iguais a ele-> caso sim, aumenta seu valor e some com a da direita e puxa todos todos os blocos da DIREITA
@@ -320,9 +320,20 @@ public class LineInstance: MonoBehaviour
                 return true;
             }
 
+        // Caso 5: o bloco está sem nenhum bloco ao lado
+        // meio se tem em a direita ou a esquerda
+        // extrema esquerda se tem ao lado direito
+        // extrema direita se tem ao lado esquerdo
+        } else if (((blockIndex != 0 && blockIndex != MaxNumOfBlocksPerLine -1) && (blocksPattern[blockIndex - 1] == 0 && blocksPattern[blockIndex + 1] == 0))
+                    || (blockIndex == 0 && blocksPattern[blockIndex + 1] == 0) || (blockIndex == MaxNumOfBlocksPerLine - 1 && blocksPattern[blockIndex - 1] == 0)) {
+
+            Debug.Log("É um bloco sozinho");
+
+            blockList[blockIndex].GetComponent<BlocoInstance>().updateBlockValue(16);
+            StartCoroutine(WaitTillBlockExplode(blockList[blockIndex].GetComponent<BlocoInstance>(), blockIndex, true));
         }
 
-        // Caso 5: o bloco está sozinho - nada acontece feijoada
+        // Caso 6: o bloco está upgradou e não tem merge - nada acontece feijoada
         return false;
     }
 
@@ -342,7 +353,7 @@ public class LineInstance: MonoBehaviour
     /// ------- Funções de fazer a linha cair e merge com corotina ---------- 
     /// 
 
-    IEnumerator WaitTillBlockExplode(BlocoInstance bloco, int index) {
+    IEnumerator WaitTillBlockExplode(BlocoInstance bloco, int index, bool alone) {
 
         bloco.canDestroy = false;
 
@@ -351,7 +362,10 @@ public class LineInstance: MonoBehaviour
         }
 
         blocksPattern[index] = 0;
-        StartCoroutine(Merge(index - 1, false, true));
+
+        if (!alone)
+            StartCoroutine(Merge(index - 1, false, true));
+      
     }
 
     IEnumerator WaitForUpgradeMerge(int index, bool pullLeft, bool pullRight) {
@@ -366,7 +380,7 @@ public class LineInstance: MonoBehaviour
             blockList[index + 1].GetComponent<BlocoInstance>().updateBlockValue(0);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         StartCoroutine(Merge(index, pullLeft, pullRight));
     }
@@ -429,7 +443,7 @@ public class LineInstance: MonoBehaviour
             if (MergeAnimation) {
                 yield return WaitForAnimation(MergeAnimation);
             } else {
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(0.2f);
             }
         }
 

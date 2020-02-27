@@ -5,6 +5,9 @@ using TMPro;
 
 public class Hold : MonoBehaviour
 {
+    // circular os spawn da bolinha
+    // matar a bolha sozinha
+
     public GameObject Player;
     public GameObject Bolinha;
     public float TimeToGrowForce = 5.0f;
